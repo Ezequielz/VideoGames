@@ -1,12 +1,14 @@
 
 import { FC } from 'react';
+import { GamesLayout } from './components/Layouts';
+import { Home } from './components/views';
+
 
 export const App: FC = () => {
   
   return (
-    <div className="container mt-3">
-        <h1>Video Juegos!<small> Todos los detalles de los mejores videojuegos</small> </h1>
-    
-    </div>
+    <GamesLayout>
+        <Home />
+    </GamesLayout>
   )
 }

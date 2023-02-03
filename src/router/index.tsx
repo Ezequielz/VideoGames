@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { App } from '../App';
-import { ListView } from '../games/views';
+import { DetailView, ListView } from '../games/views';
 
 export const router = createBrowserRouter([
   {
@@ -8,8 +8,8 @@ export const router = createBrowserRouter([
     element: <App />
   },
   {
-    path: '/',
-    element: <Navigate to="/" />
+    path: '/game/detail/:id',
+    element: <DetailView />
   },
   {
     path: '*',
