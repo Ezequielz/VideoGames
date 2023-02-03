@@ -1,24 +1,31 @@
-import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material"
 import { FC } from "react"
-import { Games } from "../interfaces/Games"
+import { useNavigate } from "react-router"
+import { Box, Card, CardContent, CardMedia, Chip, Stack, Typography } from "@mui/material"
+import { Game } from "../interfaces/games"
+
 
 
 
 interface Props {
-    game: Games
+    game: Game
 }
 
 export const GameCard: FC<Props> = ({game}) => {
+
+    const navigate = useNavigate();
+
   return (
-    <Card >     
+    <Card 
+        onClick={() => navigate(`/game/detail/${ game.id }`)}
+    >     
 
                 <CardMedia 
-                
+                    sx={{ height: '150px' }}
                     component='img'
                     className="imagen"
-                 // onLoad={ () => console.log('cargo')}
-                 image={ game.img }
-                 alt={  game.img }
+                    // onLoad={ () => console.log('cargo')}
+                    image={ game.background_image }
+                    alt={  `imagen de ${game.name}` }
                 />
             
 
@@ -39,8 +46,23 @@ export const GameCard: FC<Props> = ({game}) => {
                     
                 >{ game.name }</Typography>
 
-            </Box>
 
+            </Box>
+                <Box sx={{
+                    // display: 'flex',
+                    padding: '5px',
+                    textAlign: 'center',
+                    margin: 'auto',
+        
+                }}>
+                    {
+                        game.genres.map(genre => (
+
+                            <Chip label={ genre.name } color="primary" size="small" sx={{ fontSize: '10px', margin: '1px' }} />
+                        ))
+                    }
+
+                </Box>
 
         <CardContent>
 

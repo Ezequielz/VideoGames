@@ -1,66 +1,37 @@
+
 import { CardActionArea, Grid } from "@mui/material"
+import { LoadingIcon } from "../../components/ui";
 import { GameCard } from "../components"
-import { Games } from "../interfaces/Games"
 
+import { useGames } from "../hooks/useGames";
+import {Box, Typography} from '@mui/material';
 
-const gamesList: Games[] = [
-    {name: 'GTA',
-     img: 'https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg'
-     }, 
-     {name: 'The Witcher 3: Wild Hunt',
-      img: 'https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg' },
-    {name: 'GTA',
-     img: 'https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg'
-     }, 
-     {name: 'The Witcher 3: Wild Hunt',
-      img: 'https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg' },
-    {name: 'GTA',
-     img: 'https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg'
-     }, 
-     {name: 'The Witcher 3: Wild Hunt',
-      img: 'https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg' },
-    {name: 'GTA',
-     img: 'https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg'
-     }, 
-     {name: 'The Witcher 3: Wild Hunt',
-      img: 'https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg' },
-    {name: 'GTA',
-     img: 'https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg'
-     }, 
-     {name: 'The Witcher 3: Wild Hunt',
-      img: 'https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg' },
-    {name: 'GTA',
-     img: 'https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg'
-     }, 
-     {name: 'The Witcher 3: Wild Hunt',
-      img: 'https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg' },
-    {name: 'GTA',
-     img: 'https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg'
-     }, 
-     {name: 'The Witcher 3: Wild Hunt',
-      img: 'https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg' },
-    {name: 'GTA',
-     img: 'https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg'
-     }, 
-     {name: 'The Witcher 3: Wild Hunt',
-      img: 'https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg' },
-    {name: 'GTA',
-     img: 'https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg'
-     }, 
-     {name: 'The Witcher 3: Wild Hunt',
-      img: 'https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg' },
-    ]
 
 export const ListView = () => {
+
+  const { gamesQuery } = useGames();
+  const { data } = gamesQuery
+
+  if ( gamesQuery.isLoading )
+  return ( 
+    <Box  sx={{display: 'flex'}}>
+        <LoadingIcon /> 
+      <Typography sx={{ marginLeft:'5px' }}>
+         Cargando juegos...
+      </Typography>
+
+    </Box>
+   )
+
   return (
 
     <Grid container spacing={2}>
             
         {
-            gamesList.map( (game, index) =>(
+            data!.results.map( (game, index) =>(
                 
                 <Grid
-                    key={ index }
+                    key={ game.id }
                     item
                     xs={6} 
                     sm={4}

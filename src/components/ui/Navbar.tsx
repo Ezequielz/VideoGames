@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import { AppBar, Badge, Box, Button, IconButton, Input, InputAdornment, Link, Toolbar, Typography } from '@mui/material';
 
@@ -7,7 +8,7 @@ import { AppBar, Badge, Box, Button, IconButton, Input, InputAdornment, Link, To
 
 export const Navbar = () => {
 
-
+const navigate = useNavigate();
 const [searchTerm, setSearchTerm] = useState('');
 const [isSearchVisible, setIsSearchVisible] = useState(false);
 
@@ -17,7 +18,7 @@ const [isSearchVisible, setIsSearchVisible] = useState(false);
     <AppBar >
         <Toolbar>
             
-                <Link display='flex' alignItems='center' >
+                <Link sx={{ cursor: 'pointer' }} display='flex' alignItems='center'  onClick={() => navigate('/')}>
                     <Typography variant='h6'>Video|</Typography>
                     <Typography sx={{ ml: 0.5 , mt: 0.5}}>games</Typography>
                 </Link>

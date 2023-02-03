@@ -1,7 +1,10 @@
 import React from 'react'
+import { GamesLayout } from '../../components/Layouts'
 
 export const DetailView = () => {
   return (
-    <div>DetailView</div>
+    <GamesLayout>
+      <h1>detalle</h1>
+    </GamesLayout>
   )
 }

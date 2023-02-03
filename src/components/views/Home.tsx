@@ -1,27 +1,55 @@
 
-import { Box, Typography } from '@mui/material';
-import { FC } from 'react';
+import { Box, Grid, Typography } from '@mui/material';
+import { FC, useState } from 'react';
 import { ListView } from '../../games/views/ListView';
+import { Sidebar } from '../ui';
 
 
 
 export const Home: FC = () => {
+
+    const [selectedGenres, setSelectedGenres] = useState<string[]>([])
+
+    const onGenreChanged = (genreName: string) => {
+        ( selectedGenres.includes( genreName ) )
+        ? setSelectedGenres( selectedGenres.filter( genre => genre !== genreName ) )
+        : setSelectedGenres([...selectedGenres, genreName]);
+    }
   
   return (
-        <Box 
+        <Grid 
+            container
             className="container mt-3" 
-            sx={{ padding: '60px'}}
+            sx={{ display: 'flex'}}
         >
-            
-            <Typography variant="h1" >
-                Video Juegos!
-             </Typography >
-            <Typography variant='subtitle1'>
-                 Todos los detalles de los mejores videojuegos
-            </Typography>
+   
+            <Grid item xs={2}>
+                <Sidebar 
+                    
+                    selectedGenres={selectedGenres} 
+                    onChange={ (genreName) => onGenreChanged(genreName) }
+                />
 
-            <ListView />
+            </Grid>
+            <Grid item xs={10}>
+
+                <Box
+                    sx={{ padding: '60px 10px'}}
+                >
+
+                    <Typography variant="h1" >
+                        Video Juegos!
+                    </Typography >
+                    <Typography variant='subtitle1'>
+                        Todos los detalles de los mejores videojuegos
+                    </Typography>
+
+                    <ListView />
+                </Box>
+            </Grid>
+     
+
         
-        </Box>
+        </Grid>
   )
 }
