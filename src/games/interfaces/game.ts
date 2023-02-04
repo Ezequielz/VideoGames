@@ -64,6 +64,8 @@ export interface Game {
     tags:               Genre[];
     esrb_rating:        EsrbRating;
     short_screenshots:  ShortScreenshot[];
+    description?: string;
+    description_raw?: string;
 }
 
 export interface AddedByStatus {

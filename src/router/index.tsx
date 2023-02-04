@@ -1,11 +1,12 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import { App } from '../App';
+
+import { Home } from '../components/views';
 import { DetailView, ListView } from '../games/views';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />
+    element: <Home />
   },
   {
     path: '/game/detail/:id',

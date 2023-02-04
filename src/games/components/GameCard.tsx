@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { useNavigate } from "react-router"
 import { Box, Card, CardContent, CardMedia, Chip, Stack, Typography } from "@mui/material"
-import { Game } from "../interfaces/games"
+import { Game } from "../interfaces/game"
 
 
 
@@ -58,7 +58,12 @@ export const GameCard: FC<Props> = ({game}) => {
                     {
                         game.genres.map(genre => (
 
-                            <Chip label={ genre.name } color="primary" size="small" sx={{ fontSize: '10px', margin: '1px' }} />
+                            <Chip 
+                                key={genre.id}
+                                label={ genre.name } 
+                                color="primary" 
+                                size="small" 
+                                sx={{ fontSize: '10px', margin: '1px' }} />
                         ))
                     }
 

@@ -29,9 +29,7 @@ export const Sidebar: FC<Props> = ({ selectedGenres, onChange }) => {
             }}
         >
 
-            <Typography>
-                Sidebar
-            </Typography>
+     
             <Accordion>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}

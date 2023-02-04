@@ -2,6 +2,7 @@
 import { Box, Grid, Typography } from '@mui/material';
 import { FC, useState } from 'react';
 import { ListView } from '../../games/views/ListView';
+import { GamesLayout } from '../Layouts';
 import { Sidebar } from '../ui';
 
 
@@ -17,10 +18,12 @@ export const Home: FC = () => {
     }
   
   return (
+      <GamesLayout>
+
         <Grid 
             container
             className="container mt-3" 
-            sx={{ display: 'flex'}}
+            sx={{ display: 'flex', padding: '60px'}}
         >
    
             <Grid item xs={2}>
@@ -34,7 +37,7 @@ export const Home: FC = () => {
             <Grid item xs={10}>
 
                 <Box
-                    sx={{ padding: '60px 10px'}}
+                    sx={{ padding: '15px'}}
                 >
 
                     <Typography variant="h1" >
@@ -51,5 +54,6 @@ export const Home: FC = () => {
 
         
         </Grid>
+      </GamesLayout>
   )
 }

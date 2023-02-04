@@ -4,7 +4,7 @@ import { Genres } from "../interfaces";
 
 
 
-const API_KEY = 'dfeb460a477942148b1c9009e784a08e'
+const API_KEY = import.meta.env.VITE_rawg_API_KEY
 
 const getGenres = async():Promise<Genres> => {
 

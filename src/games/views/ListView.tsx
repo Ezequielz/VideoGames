@@ -5,6 +5,7 @@ import { GameCard } from "../components"
 
 import { useGames } from "../hooks/useGames";
 import {Box, Typography} from '@mui/material';
+import { Game } from "../interfaces/game";
 
 
 export const ListView = () => {
@@ -28,7 +29,7 @@ export const ListView = () => {
     <Grid container spacing={2}>
             
         {
-            data!.results.map( (game, index) =>(
+            data!.results.map( (game:Game) =>(
                 
                 <Grid
                     key={ game.id }
