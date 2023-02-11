@@ -16,7 +16,7 @@ export const GameCard: FC<Props> = ({game}) => {
 
   return (
     <Card 
-        onClick={() => navigate(`/game/detail/${ game.id }`)}
+        onClick={() => navigate(`/game/${ game.slug }`)}
     >     
 
                 <CardMedia 

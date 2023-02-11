@@ -23,7 +23,7 @@ export const Home: FC = () => {
         <Grid 
             container
             className="container mt-3" 
-            sx={{ display: 'flex', padding: '60px'}}
+            sx={{ display: 'flex', padding: '60px 0'}}
         >
    
             <Grid item xs={2}>
@@ -34,18 +34,19 @@ export const Home: FC = () => {
                 />
 
             </Grid>
+
             <Grid item xs={10}>
 
                 <Box
-                    sx={{ padding: '15px'}}
+                    sx={{ padding: '20px'}}
                 >
 
-                    <Typography variant="h1" >
+                    {/* <Typography variant="h1" >
                         Video Juegos!
                     </Typography >
                     <Typography variant='subtitle1'>
                         Todos los detalles de los mejores videojuegos
-                    </Typography>
+                    </Typography> */}
 
                     <ListView />
                 </Box>

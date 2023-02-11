@@ -24,18 +24,24 @@ export const GameDetail: FC<Props> = ({ game, screenshots }) => {
 
 
   return (
-    <Box sx={{ padding: {xs:'60px 0', sm:'60px'} }}>
+    <Box >
 
  
-        <Grid  container >
+        <Grid  container sx={{
+            marginTop:'40px',
+            padding: {xs:'20px', md:'60px'},
+            backgroundColor:'transparent',
+            backgroundImage: `linear-gradient(rgba(15, 15, 15, 0), rgb(21, 21, 21)), linear-gradient(rgba(21, 21, 21, 0.8), rgba(21, 21, 21, 0.5)), url(${ game?.background_image })`,
+            backgroundSize:'cover'
+        }}>
 
             <Grid item xs={12} lg={6}>
                 <Box sx={{
                     display:'flex',
                     justifyContent:'space-between',
-                    alignItems:'center'
+                    alignItems:'center',
                 }}> 
-                    <Typography variant="h1">{game?.name}</Typography>.
+                    <Typography variant="h1" >{game?.name}</Typography>.
 
                     <Box sx={{ bgcolor:'#ffff',color:'black', padding:'4px 12px', borderRadius:'10px', fontStyle:'italic'}}>
 
@@ -87,159 +93,94 @@ export const GameDetail: FC<Props> = ({ game, screenshots }) => {
             </Grid>
 
         </Grid>
- 
 
-        <Grid container sx={{ marginTop:'5px' }}>
+        <Grid container sx={{ padding: {xs:'20px', md:'0px 60px'} }}>
+
 
            <Grid item xs={12} lg={6} >
-              <Grid container sx={{ display:'flex',justifyContent:'space-between'}}>
+                <Grid container>
 
-                <Grid item xs={12} md={5}  xl={6}>
-                    <Typography variant="body1" sx={{ padding: '5px ',textAlign:''}}>Platforms</Typography>
-                    <Grid container  style={{ display: 'flex', gap: '5px', }}>
-                            {
-                                game?.platforms.map( platform => (
-                                    
-                                    <Box 
-                                        key={platform.platform.id}
-                                        sx={{ display:'flex', gap:'2px' }}
-                                        onClick={() => navigate(`/games/platform/${ platform.platform.slug }`)}
-                                        className='btn '
-                                    >
-
-                                        <Typography 
-                                    
-                                            style={{
-                                                // backgroundColor:'red',
-                                                padding:'5px',
-                                                borderRadius:'5px',
-                                                cursor: 'pointer',
-                                                fontSize:'.9rem'
-                                            }}
-                                            
-                                        >
-                                            { (platform.platform.name) }
-                                        </Typography>
-                                    </Box>
-
-                                
-
-                                ))
-                            }
-                    </Grid>
-                
-                </Grid>
-
-                <Grid item xs={12} md={5}  xl={6}>
-                    <Typography variant="body1" sx={{ padding: '5px ',textAlign:''}}>Tags</Typography>          
-                    <Grid container  style={{ display: 'flex', gap: '5px', }}>
-                            {
-                                game?.tags.map( tag => (
-                                    
-                                    <Box 
-                                        key={tag.id}
-                                        sx={{ display:'flex', gap:'2px' }}
-                                        onClick={() => navigate(`/games/tag/${ tag.slug }`)}
-                                        className='btn '
-                                    >
-
-                                        <Typography 
-                                    
-                                            style={{
-                                                // backgroundColor:'red',
-                                                padding:'5px',
-                                                borderRadius:'5px',
-                                                cursor: 'pointer',
-                                                fontSize:'.9rem'
-                                            }}
-                                            
-                                        >
-                                            { (tag.name) }
-                                        </Typography>
-                                    </Box>
-
-                                
-
-                                ))
-                            }
-                    </Grid>
-                </Grid>
-
-                <Grid item xs={12} md={4} xl={6}>
-                    <Typography variant="body1" sx={{ padding: '5px', textAlign:''}}>Genres</Typography>
-                    <Grid container  style={{ display: 'flex', gap: '5px' , justifyContent:''}}>
-                            {
-                                game?.genres.map( genre => (
-                                    
-                                    <Box 
-                                        key={genre.id}
-                                        sx={{ display:'flex', gap:'2px'}}
-                                        onClick={() => navigate(`/games/genre/${ genre.slug }`)}
-                                        className='btn '
-                                    >
-
-                                        <Typography 
-                                    
-                                            style={{
-                                                // backgroundColor:'red',
-                                                padding:'5px',
-                                                borderRadius:'5px',
-                                                cursor: 'pointer',
-                                                fontSize:'.9rem'
-                                            }}
-                                            
-                                        >
-                                            { (genre.name) }
-                                        </Typography>
-                                    </Box>
-
-                                
-
-                                ))
-                            }
-                    </Grid>
-             
-                </Grid>
-
-                <Grid item xs={12} md={6} >
-                    <Typography variant="body1"  sx={{ padding: '5px',textAlign:''}}>Publisher</Typography>
-                    {
-                         game?.publishers && 
-                         
-                         game?.publishers.map( publisher => (
-                                
-                                <Box 
-                                    key={ publisher.id }
-                                    sx={{ display:'flex', gap:'2px'}}
-                                    onClick={() => navigate(`/games/publisher/${ publisher.slug }`)}
-                                    className='btn '
-                                >
+                    <Grid item lg={4}  sx={{padding:'10px'}}>
+                        <Typography>Genres</Typography>
+                        {
+                            game?.genres.map((genre) => (
 
                                     <Typography 
-
-                                        style={{
-                                            // backgroundColor:'red',
-                                            padding:'5px',
-                                            borderRadius:'5px',
-                                            cursor: 'pointer',
-                                            fontSize:'.9rem'
-                                        }}
-                                        
+                                        variant="caption" 
+                                        key={genre.id} 
+                                        className="btn" 
+                                        style={{margin:'2px'}}
+                                        onClick={() => navigate(`/games/genre/${ genre.slug }`)}
                                     >
-                                        { (publisher.name) }
+                                        {genre.name}
                                     </Typography>
-                                </Box>
+                                    ))
+                                }
+                    </Grid >
 
-                            
+                    <Grid item lg={4}  sx={{padding:'10px'}}>
+                        <Typography>Publishers</Typography>
+                            {
+                                game?.publishers!.map((publisher) => (
 
-                            ))
+                                <Typography 
+                                    variant="caption" 
+                                    key={publisher.id} 
+                                    className="btn" 
+                                    style={{margin:'2px'}}
+                                    onClick={() => navigate(`/games/publisher/${ publisher.slug }`)}
+                                >
+                                    {publisher.name} 
+                                </Typography>
+                                ))
+                            }
+                    </Grid >
+                    
+                    <Grid item lg={4}  sx={{padding:'10px'}}>
+                        <Typography>Website</Typography>
+                        <Link href={ game?.website } underline="none" target="_blank" rel="noreferrer">
+                        <Typography variant="caption" className="btn" style={{margin:'2px'}}> {game?.website} </Typography>
+                        </Link>      
+                    </Grid >
+
+                    <Grid item lg={8}  sx={{padding:'10px'}}>
+                        <Typography>Tags</Typography>
+                        {
+                            game?.tags.map(tag => (
+
+                                    <Typography 
+                                        variant="caption" 
+                                        key={tag.id} 
+                                        className="btn" 
+                                        style={{margin:'2px'}}
+                                        onClick={() => navigate(`/games/tag/${ tag.slug }`)}
+                                    >
+                                        {tag.name} 
+                                    </Typography>
+                                    ))
                         }
-                 
+                    </Grid >
+                    
+                    <Grid item lg={4}  sx={{padding:'10px'}}>
+                        <Typography>Platforms</Typography>
+                        {
+                            game?.platforms.map(({platform}) => (
+
+                                    <Typography 
+                                        variant="caption" 
+                                        key={platform.id} 
+                                        className="btn" 
+                                        style={{margin:'2px'}}
+                                        onClick={() => navigate(`/games/platform/${ platform.slug }`)}
+                                    >
+                                        {platform.name}
+                                    </Typography >
+                                    ))
+                                }
+                    </Grid >
+
                 </Grid>
-
-              </Grid>      
-
-           </Grid>         
+           </Grid>
 
            <Grid item xs={12} lg={6} >
              
@@ -270,14 +211,7 @@ export const GameDetail: FC<Props> = ({ game, screenshots }) => {
                     </Grid>
                 </Box>       
 
-                <Box sx={{ textAlign:'center', marginTop:'30px'} }>
-                    <Link href={ game?.website } underline="none" target="_blank" rel="noreferrer">
-                        <Button
-                            className="btn"
-                            sx={{ fontSize:'2rem', padding:'5px 30px', borderRadius:'40px'}}
-                        >WEBSITE</Button>
-                    </Link>
-                </Box>
+
                 
               
            </Grid>

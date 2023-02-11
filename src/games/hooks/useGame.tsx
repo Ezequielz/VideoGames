@@ -6,20 +6,20 @@ import { Game } from '../interfaces/game';
 
 const API_KEY = import.meta.env.VITE_rawg_API_KEY
 
-const getGameInfo = async( gameNumber: number ):Promise<Game> => {
+const getGameInfo = async( gameSlug: string ):Promise<Game> => {
 
-    const { data } = await rawgApi.get<Game>(`/games/${ gameNumber }?key=${ API_KEY }`);
+    const { data } = await rawgApi.get<Game>(`/games/${ gameSlug }?key=${ API_KEY }`);
 
     return data;
 
 }
 
 
-export const useGame = ( gameNumber: number ) => {
+export const useGame = ( gameSlug: string ) => {
 
    const gameQuery = useQuery(
-        ['game', gameNumber],
-        () => getGameInfo( gameNumber ),
+        ['game', gameSlug],
+        () => getGameInfo( gameSlug ),
         {
           refetchOnWindowFocus: false
         }

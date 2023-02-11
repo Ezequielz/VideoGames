@@ -11,12 +11,12 @@ export const DetailView = () => {
 
   const params = useParams();
 
-  const { id = '0' } = params;
+  const { slug } = params;
 
-  const gameQuery  = useGame( +id )
+  const gameQuery  = useGame( slug! )
   const { data } = gameQuery
 
-  const { screenQuery }  = useScreenshots( +id )
+  const { screenQuery }  = useScreenshots( slug! )
   const { data: screenshots } = screenQuery
 
  if( !gameQuery.isLoading && !gameQuery.data) {
@@ -25,13 +25,7 @@ export const DetailView = () => {
 
   return (
     <GamesLayout>
-      <Box sx={{
-        padding: {xs:'20px', xl:'60px'},
-        background: `radial-gradient(rgba(24, 26, 33, 0.7) 0%, #181a21 100%)  , url(${ data?.background_image }) no-repeat center `,
-        backgroundSize: '100% 100%',
-        height: {xs:'100%', xl:'65vh'}
-        // marginTop: '-20px'
-      }}>
+      <Box >
         {( gameQuery.isLoading )
         ?(
           <Box  sx={{display: 'flex', justifyContent:'center', alignItems: 'center', height :'100vh'}}>

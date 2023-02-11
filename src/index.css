@@ -29,6 +29,7 @@
 
 .btn{
     color: #818181 !important;
+    cursor: pointer;
 }
 .btn:hover{
     color: #fff !important;

@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import { Home } from '../components/views';
-import { DetailView, GenreView, ListView, PlatformView } from '../games/views';
+import { DetailView, GenreView, ListView, PlatformView, PublisherView, TagView } from '../games/views';
 
 export const router = createBrowserRouter([
   {
@@ -9,12 +9,20 @@ export const router = createBrowserRouter([
     element: <Home />
   },
   {
-    path: '/game/detail/:id',
+    path: '/game/:slug',
     element: <DetailView />
   },
   {
     path: '/games/platform/:platform',
     element: <PlatformView />
+  },
+  {
+    path: '/games/publisher/:publisher',
+    element: <PublisherView />
+  },
+  {
+    path: '/games/tag/:tag',
+    element: <TagView />
   },
   {
     path: '/games/genre/:genre',

@@ -4,19 +4,19 @@ import { Screenshots } from "../interfaces";
 
 const API_KEY = import.meta.env.VITE_rawg_API_KEY
 
-const getScreenShoots = async( gameNumber: number ):Promise<Screenshots> => {
+const getScreenShoots = async( gameSlug: string ):Promise<Screenshots> => {
 
-    const { data } = await rawgApi.get<Screenshots>(`/games/${ gameNumber }/screenshots?key=${ API_KEY }`);
+    const { data } = await rawgApi.get<Screenshots>(`/games/${ gameSlug }/screenshots?key=${ API_KEY }`);
   
     return data;
   }
 
 
-export const useScreenshots = (gameNumber: number) => {
+export const useScreenshots = (gameSlug: string) => {
 
     const screenQuery = useQuery(
-        ['game', gameNumber, 'screenshot' ],
-        () => getScreenShoots( gameNumber ),
+        ['game', gameSlug, 'screenshot' ],
+        () => getScreenShoots( gameSlug ),
         {
           refetchOnWindowFocus: false
         }

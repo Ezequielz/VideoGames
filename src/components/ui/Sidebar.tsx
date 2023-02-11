@@ -19,7 +19,7 @@ export const Sidebar: FC<Props> = ({ selectedGenres, onChange }) => {
         sx={{
           
             height: '100vh',
-            marginTop: '60px',
+            // marginTop: '60px',
            
         }}
     >
