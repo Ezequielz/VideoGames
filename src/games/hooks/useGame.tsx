@@ -20,6 +20,9 @@ export const useGame = ( gameNumber: number ) => {
    const gameQuery = useQuery(
         ['game', gameNumber],
         () => getGameInfo( gameNumber ),
+        {
+          refetchOnWindowFocus: false
+        }
    );
 
   return (

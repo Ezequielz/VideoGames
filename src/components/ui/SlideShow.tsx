@@ -86,7 +86,7 @@ export const SlideShow: FC<Props> = ({ images }) => {
              
             //     src='https://media.rawg.io/media/screenshots/1ac/1ac19f31974314855ad7be266adeb500.jpg'
             // />
-            <img src={image.image} alt="" />
+            <img src={image.image} alt="" key={index} />
 
         ))
     }
@@ -128,7 +128,7 @@ export const SlideShow: FC<Props> = ({ images }) => {
             
                 //     src='https://media.rawg.io/media/screenshots/1ac/1ac19f31974314855ad7be266adeb500.jpg'
                 // />
-                <img src={image.image} alt="" />
+                <img src={image.image} alt="" key={index}/>
 
             ))
         }

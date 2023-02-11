@@ -66,6 +66,15 @@ export interface Game {
     short_screenshots:  ShortScreenshot[];
     description?: string;
     description_raw?: string;
+    publishers?: Publisher[];
+    website?: string;
+}
+export interface Publisher {
+    id: number;
+    name: string;
+    slug: string;
+    games_count: number;
+    image_background: string;
 }
 
 export interface AddedByStatus {

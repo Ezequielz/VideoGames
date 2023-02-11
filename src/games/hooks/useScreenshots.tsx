@@ -17,6 +17,9 @@ export const useScreenshots = (gameNumber: number) => {
     const screenQuery = useQuery(
         ['game', gameNumber, 'screenshot' ],
         () => getScreenShoots( gameNumber ),
+        {
+          refetchOnWindowFocus: false
+        }
       );
 
     return {

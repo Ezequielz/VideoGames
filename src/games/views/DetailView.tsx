@@ -1,10 +1,11 @@
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { useParams } from 'react-router'
+import { Navigate, useParams } from 'react-router'
 import { GamesLayout } from '../../components/Layouts'
 import { LoadingIcon } from '../../components/ui';
-import { GameInfo } from '../components/GameInfo';
-import { useGame, useScreenshots } from '../hooks';
+
+import { GameDetail } from '../components';
+import { useGame,  useScreenshots } from '../hooks';
 
 export const DetailView = () => {
 
@@ -18,15 +19,18 @@ export const DetailView = () => {
   const { screenQuery }  = useScreenshots( +id )
   const { data: screenshots } = screenQuery
 
+ if( !gameQuery.isLoading && !gameQuery.data) {
+  return <Navigate to="/"/>
+ }
 
   return (
     <GamesLayout>
       <Box sx={{
-        padding: '60px',
+        padding: {xs:'20px', xl:'60px'},
         background: `radial-gradient(rgba(24, 26, 33, 0.7) 0%, #181a21 100%)  , url(${ data?.background_image }) no-repeat center `,
-        backgroundSize: '100% 80%',
-        height: '100vh',
-        marginTop: '-20px'
+        backgroundSize: '100% 100%',
+        height: {xs:'100%', xl:'65vh'}
+        // marginTop: '-20px'
       }}>
         {( gameQuery.isLoading )
         ?(
@@ -40,8 +44,9 @@ export const DetailView = () => {
         )
         : (
 
-          <GameInfo game={ data } screenshots={screenshots}/>
+          <GameDetail game={ data } screenshots={screenshots}/>
         )
+        
         }
       </Box>
     </GamesLayout>

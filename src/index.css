@@ -27,3 +27,25 @@
     transition: all 0.2s;
 }
 
+.btn{
+    color: #818181 !important;
+}
+.btn:hover{
+    color: #fff !important;
+}
+
+
+.btn-store{
+    font-family: Georgia, 'Times New Roman', Times, serif !important;
+    font-weight: bold !important;
+    padding: 10px !important;
+    background-color: #2d2d2d !important;
+    border-radius: 8px !important;
+    color: #818181 !important;
+}
+
+.btn-store:hover{
+    background-color: #fff !important;
+}
+
+
