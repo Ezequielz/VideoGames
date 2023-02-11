@@ -1,6 +1,6 @@
 
 import { FC } from 'react'
-import { Navbar } from '../ui'
+import { Footer, Navbar } from '../ui'
 
 interface Props{
     children: React.ReactNode,
@@ -15,12 +15,12 @@ export const GamesLayout:FC<Props> = ({ children }) => {
         <Navbar />
     </nav>
 
-    <main>  
+    <main style={{ marginBottom:'30px'}}>  
         { children }
     </main>
    
     <footer>
-        {/* TODO custom footer */}
+        <Footer />
     </footer>
    
    </div>
