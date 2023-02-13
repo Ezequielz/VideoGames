@@ -1,15 +1,17 @@
 
-import { Box, Grid, IconButton } from '@mui/material';
-
 import { FC, useState } from 'react';
-import { ListView } from '../../games/views/ListView';
+import { Box } from '@mui/material';
+
 import { GamesLayout } from '../Layouts';
+import { ListView, ListViewInfinite } from '../../games/views';
 import { Sidebar } from '../ui';
-import MenuIcon from '@mui/icons-material/Menu';
+
+
 
 
 export const Home: FC = () => {
 
+const [infinite, setInfinite] = useState(true)
 
 const [selectedGenres, setSelectedGenres] = useState<string[]>([])
 const [selectedTags, setSelectedTags] = useState<string[]>([])
@@ -70,16 +72,29 @@ const spaceToFilters = '250px'
                     padding: '20px'
                 }}
             >
-                <ListView 
-                    selectedGenres={selectedGenres} 
-                    selectedPlatform={selectedPlatform} 
-                    selectedTags={selectedTags} 
-                    selectedPublishers={selectedPublishers} 
-                />
+                {
+                    infinite
+                    ?(
+
+                        <ListViewInfinite
+                            selectedGenres={selectedGenres} 
+                            selectedPlatform={selectedPlatform} 
+                            selectedTags={selectedTags} 
+                            selectedPublishers={selectedPublishers} 
+                        />
+                        )
+                        :(
+                        <ListView
+                            selectedGenres={selectedGenres} 
+                            selectedPlatform={selectedPlatform} 
+                            selectedTags={selectedTags} 
+                            selectedPublishers={selectedPublishers} 
+                        />
+
+                    )
+                }
             </Box>
         </Box>
-   
-
       </GamesLayout>
   )
 }

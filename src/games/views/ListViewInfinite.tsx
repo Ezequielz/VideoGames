@@ -1,15 +1,14 @@
 
 import { FC } from 'react';
 import { CardActionArea, Grid } from "@mui/material"
+import {Box, Typography} from '@mui/material';
+import Button from '@mui/material/Button/Button';
+
 import { LoadingIcon } from "../../components/ui";
 import { GameCard } from "../components"
-
-import { useGames } from "../hooks/useGames";
-import {Box, Typography} from '@mui/material';
+import { useGamesInfinite } from '../hooks';
 import { Game } from "../interfaces/game";
-import Button from '@mui/material/Button/Button';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+
 
 
 interface Props {
@@ -19,10 +18,10 @@ interface Props {
   selectedPublishers: string[];
 }
 
-export const ListView: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers }) => {
+export const ListViewInfinite: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers }) => {
 
-  const { gamesQuery, page, nextPage, prevPage } = useGames({ genres: selectedGenres, platforms: selectedPlatform, tags: selectedTags, publishers: selectedPublishers });
-  const { data } = gamesQuery
+  const { gamesQuery } = useGamesInfinite({ genres: selectedGenres, platforms: selectedPlatform, tags: selectedTags, publishers: selectedPublishers });
+  const data = gamesQuery.data?.pages.flat()
 
   if ( gamesQuery.isLoading )
   return ( 
@@ -35,7 +34,7 @@ export const ListView: FC<Props> = ({ selectedGenres, selectedPlatform,selectedT
     </Box>
    )
 
-   if (data && data?.results.length < 1  )
+   if (data && data?.length < 1  )
    return (
     <>
       <Typography>No se encontro ningún juego con esos filtros</Typography>
@@ -49,14 +48,15 @@ export const ListView: FC<Props> = ({ selectedGenres, selectedPlatform,selectedT
       <Grid container spacing={2}>
               
           {
-              data?.results.map( (game:Game) =>(
+              data?.map( (game:Game) =>(
                   
                   <Grid
                       key={ game.id }
                       item
                       xs={6} 
                       sm={4}
-                      md={3} 
+                      md={3}
+                      
                   >
 
                           <CardActionArea>
@@ -73,25 +73,14 @@ export const ListView: FC<Props> = ({ selectedGenres, selectedPlatform,selectedT
 
       </Grid>
 
-          <Box sx={{
-            display:'flex',
-            alignItems:'center',
-            justifyContent:'end'
-          }}>
-            <Button
-              onClick={ prevPage }
-              disabled={ gamesQuery.isFetching }
-            > <NavigateBeforeIcon />
-            </Button>
-            
-            <Typography> {page} </Typography>
+      <Button 
+        sx={{ marginTop:'15px' }}
+        disabled={ !gamesQuery.hasNextPage }
+        onClick={ () => gamesQuery.fetchNextPage() }
+      >
+        <Typography>Load More</Typography>
+      </Button>
 
-            <Button
-              onClick={ nextPage }
-              disabled={ gamesQuery.isFetching }
-            ><NavigateNextIcon />
-            </Button>
-          </Box>
     </Box>
 
     
