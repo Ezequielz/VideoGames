@@ -1,7 +1,8 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import { AppBar, Badge, Box, Button, IconButton, Input, InputAdornment, Link, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, Link, Toolbar, Typography } from '@mui/material';
+
 
 
 
@@ -15,21 +16,23 @@ const [isSearchVisible, setIsSearchVisible] = useState(false);
 
 
   return (
-    <AppBar >
-        <Toolbar>
+    <AppBar sx={{ padding:'0 60px' }}>
+        <Toolbar >
             
                 <Link sx={{ cursor: 'pointer' }} display='flex' alignItems='center'  onClick={() => navigate('/')}>
-                    <Typography variant='h6'>Video|</Typography>
+                    <Typography variant='h6' >Video|</Typography>
                     <Typography sx={{ ml: 0.5 , mt: 0.5}}>games</Typography>
                 </Link>
-
+ 
             <Box  flex={1}/>
 
             <Button 
-            //   onClick={ toggleSideMenu }
+              // onClick={ toggleSideMenu }
             >
               Menu
             </Button>
+
+
 
         </Toolbar>
     </AppBar>    
