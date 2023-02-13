@@ -9,7 +9,9 @@ export const Footer = () => {
         justifyContent:'center',
         bgcolor:'#262626',
         alignItems:'center',
-        color:'white'
+        color:'white',
+        position:'absolute',
+        width:'100%'
     }}>
         
         <Typography> Desarrollado por Ezequiel Zapata</Typography>

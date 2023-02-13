@@ -19,7 +19,7 @@ export const GamesLayout:FC<Props> = ({ children }) => {
         { children }
     </main>
    
-    <footer>
+    <footer style={{position:'relative'}}>
         <Footer />
     </footer>
    

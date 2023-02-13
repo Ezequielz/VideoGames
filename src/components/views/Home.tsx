@@ -38,7 +38,7 @@ const onPublisherChanged = (publisherSlug: string) => {
     ? setSelectedPublishers( selectedPublishers.filter( publisher => publisher !== publisherSlug ) )
     : setSelectedPublishers([...selectedPublishers, publisherSlug]);
 }
-setSelectedPublishers
+
 const spaceToFilters = '250px'
   
   return (
