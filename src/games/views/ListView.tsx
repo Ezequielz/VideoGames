@@ -1,4 +1,5 @@
 
+import { FC } from 'react';
 import { CardActionArea, Grid } from "@mui/material"
 import { LoadingIcon } from "../../components/ui";
 import { GameCard } from "../components"
@@ -8,9 +9,16 @@ import {Box, Typography} from '@mui/material';
 import { Game } from "../interfaces/game";
 
 
-export const ListView = () => {
+interface Props {
+  selectedGenres: string[];
+  selectedPlatform: number[];
+  selectedTags: string[];
+  selectedPublishers: string[];
+}
 
-  const { gamesQuery } = useGames();
+export const ListView: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers }) => {
+
+  const { gamesQuery } = useGames({ genres: selectedGenres, platforms: selectedPlatform, tags: selectedTags, publishers: selectedPublishers });
   const { data } = gamesQuery
 
   if ( gamesQuery.isLoading )

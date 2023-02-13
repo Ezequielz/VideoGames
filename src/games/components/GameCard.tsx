@@ -1,7 +1,10 @@
 import { FC } from "react"
 import { useNavigate } from "react-router"
-import { Box, Card, CardContent, CardMedia, Chip, Stack, Typography } from "@mui/material"
+import { useQueryClient } from "@tanstack/react-query"
+
+import { Box, Card, CardContent, CardMedia, Chip, Typography } from "@mui/material"
 import { Game } from "../interfaces/game"
+import { getGameInfo } from "../hooks/useGame"
 
 
 
@@ -14,9 +17,21 @@ export const GameCard: FC<Props> = ({game}) => {
 
     const navigate = useNavigate();
 
+    const queryClient = useQueryClient();
+    const preSetData = () => {
+        
+
+        queryClient.setQueryData(
+            [ 'game', game.slug ],
+            game,
+        );
+
+    }
+
   return (
     <Card 
         onClick={() => navigate(`/game/${ game.slug }`)}
+        onMouseEnter={ preSetData }
     >     
 
                 <CardMedia 

@@ -34,6 +34,7 @@ export const GameDetail: FC<Props> = ({ game, screenshots }) => {
             backgroundImage: `linear-gradient(rgba(15, 15, 15, 0), rgb(21, 21, 21)), linear-gradient(rgba(21, 21, 21, 0.8), rgba(21, 21, 21, 0.5)), url(${ game?.background_image })`,
             backgroundSize:'cover'
         }}>
+            
 
             <Grid item xs={12} lg={6}>
                 <Box sx={{
@@ -120,7 +121,7 @@ export const GameDetail: FC<Props> = ({ game, screenshots }) => {
 
                     <Grid item lg={4}  sx={{padding:'10px'}}>
                         <Typography>Publishers</Typography>
-                            {
+                            {   game?.publishers &&
                                 game?.publishers!.map((publisher) => (
 
                                 <Typography 

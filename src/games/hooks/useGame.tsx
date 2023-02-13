@@ -6,7 +6,7 @@ import { Game } from '../interfaces/game';
 
 const API_KEY = import.meta.env.VITE_rawg_API_KEY
 
-const getGameInfo = async( gameSlug: string ):Promise<Game> => {
+export const getGameInfo = async( gameSlug: string ):Promise<Game> => {
 
     const { data } = await rawgApi.get<Game>(`/games/${ gameSlug }?key=${ API_KEY }`);
 

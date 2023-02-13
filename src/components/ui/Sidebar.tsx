@@ -10,10 +10,16 @@ import Divider from '@mui/material/Divider/Divider';
 
 interface Props {
     selectedGenres: string[];
-    onChange: ( genreName:string ) => void;
+    onGenreChange: ( genreSlug:string ) => void;
+    selectedPlatform: number[];
+    onPlatformChanged: ( platformID:number ) => void;
+    selectedTags: string[];
+    onTagChanged: ( tagSlug:string ) => void;
+    selectedPublishers: string[];
+    onPublisherChanged: ( publisherSlug:string ) => void;
 }
 
-export const Sidebar: FC<Props> = ({ selectedGenres, onChange }) => {
+export const Sidebar: FC<Props> = ({ selectedGenres, onGenreChange, selectedPlatform, onPlatformChanged,selectedTags, onTagChanged, selectedPublishers, onPublisherChanged  }) => {
 
     const { genreQuery } = useGenres();
     const { data: genres } = genreQuery;
@@ -45,9 +51,9 @@ export const Sidebar: FC<Props> = ({ selectedGenres, onChange }) => {
                :
                genres!.results.map( genre => (
                     <Box 
-                        className={`${selectedGenres.includes(genre.name) ? 'genre-active': 'genre'}`}
+                        className={`${selectedGenres.includes(genre.slug) ? 'genre-active': 'genre'}`}
                         key={genre.id}
-                        onClick={ () => onChange( genre.name ) }
+                        onClick={ () => onGenreChange( genre.slug ) }
                         sx={{
                            margin:'3px 1px'
                         }}
@@ -77,9 +83,9 @@ export const Sidebar: FC<Props> = ({ selectedGenres, onChange }) => {
                :
                platforms!.results.map( platform => (
                     <Box 
-                        className={`${selectedGenres.includes(platform.name) ? 'genre-active': 'genre'}`}
+                        className={`${selectedPlatform.includes(platform.id) ? 'genre-active': 'genre'}`}
                         key={platform.id}
-                        onClick={ () => onChange( platform.name ) }
+                        onClick={ () => onPlatformChanged( platform.id ) }
                         sx={{
                            margin:'3px 1px'
                         }}
@@ -109,9 +115,9 @@ export const Sidebar: FC<Props> = ({ selectedGenres, onChange }) => {
                :
                tags!.results.map( tag => (
                     <Box 
-                        className={`${selectedGenres.includes(tag.name) ? 'genre-active': 'genre'}`}
+                        className={`${selectedTags.includes(tag.slug) ? 'genre-active': 'genre'}`}
                         key={tag.id}
-                        onClick={ () => onChange( tag.name ) }
+                        onClick={ () => onTagChanged( tag.slug ) }
                         sx={{
                            margin:'3px 1px'
                         }}
@@ -141,9 +147,9 @@ export const Sidebar: FC<Props> = ({ selectedGenres, onChange }) => {
                :
                publishers!.results.map( publisher => (
                     <Box 
-                        className={`${selectedGenres.includes(publisher.name) ? 'genre-active': 'genre'}`}
+                        className={`${selectedPublishers.includes(publisher.slug) ? 'genre-active': 'genre'}`}
                         key={publisher.id}
-                        onClick={ () => onChange( publisher.name ) }
+                        onClick={ () => onPublisherChanged( publisher.slug ) }
                         sx={{
                            margin:'3px 1px'
                         }}

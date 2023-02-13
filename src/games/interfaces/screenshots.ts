@@ -8,7 +8,7 @@ export interface Screenshots {
 export interface Screenshot {
     id:         number;
     image:      string;
-    width:      number;
-    height:     number;
-    is_deleted: boolean;
+    width?:      number;
+    height?:     number;
+    is_deleted?: boolean;
 }
