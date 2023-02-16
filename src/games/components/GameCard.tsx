@@ -42,28 +42,28 @@ export const GameCard: FC<Props> = ({game}) => {
                     image={ game.background_image }
                     alt={  `imagen de ${game.name}` }
                 />
-            
+       
 
             <Box sx={{ 
-                        // padding: '5px',
-                        minHeight: '50px', 
+                        padding: '25px 0 0 0',
+                        // minHeight: '50px', 
                         display: 'flex',
                         alignItems:'center',
                         justifyContent:'center' 
                     }} 
-                    className='fadeIn'
+               
             >
                 <Typography 
                     fontWeight={{ xs:700 }} 
-                    fontSize={{xs:'0.72rem',sm:"0.85rem"}} 
-                    padding={{xs:'0 2px', md:'0 5px'}}
+                    // fontSize={{xs:'0.72rem',sm:"0.85rem"}} 
+                    // padding={{xs:'0 2px', md:'0 5px'}}
                     textAlign='center' 
                     
                 >{ game.name }</Typography>
 
 
             </Box>
-                <Box sx={{
+                {/* <Box sx={{
                     // display: 'flex',
                     padding: '5px',
                     textAlign: 'center',
@@ -82,7 +82,7 @@ export const GameCard: FC<Props> = ({game}) => {
                         ))
                     }
 
-                </Box>
+                </Box> */}
 
         <CardContent>
 

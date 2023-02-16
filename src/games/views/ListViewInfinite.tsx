@@ -8,6 +8,7 @@ import { LoadingIcon } from "../../components/ui";
 import { GameCard } from "../components"
 import { useGamesInfinite } from '../hooks';
 import { Game } from "../interfaces/game";
+import { GameCardList } from '../components/GameCardList';
 
 
 
@@ -16,9 +17,10 @@ interface Props {
   selectedPlatform: number[];
   selectedTags: string[];
   selectedPublishers: string[];
+  view: string;
 }
 
-export const ListViewInfinite: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers }) => {
+export const ListViewInfinite: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers, view }) => {
 
   const { gamesQuery } = useGamesInfinite({ genres: selectedGenres, platforms: selectedPlatform, tags: selectedTags, publishers: selectedPublishers });
   const data = gamesQuery.data?.pages.flat()
@@ -43,11 +45,14 @@ export const ListViewInfinite: FC<Props> = ({ selectedGenres, selectedPlatform,s
 
   return (
 
-    <Box>
+    <Box >
 
-      <Grid container spacing={2}>
+    
               
-          {
+          { view === 'module'
+            ? (
+            <Grid container spacing={2}>
+             {
               data?.map( (game:Game) =>(
                   
                   <Grid
@@ -66,12 +71,41 @@ export const ListViewInfinite: FC<Props> = ({ selectedGenres, selectedPlatform,s
                           </CardActionArea>
 
                   </Grid>
+
+                ))
+             }
               
+              </Grid>   
+            ):(
+              <Grid container spacing={2}>
                   
-              ))
+              {
+                  data?.map( (game:Game) =>(
+                      
+                      <Grid
+                          key={ game.id }
+                          item
+                          xs={12} 
+                       
+                      >
+
+                              <CardActionArea>
+                                  
+                                   <GameCardList  game={game} />
+
+                              </CardActionArea>
+
+                      </Grid>
+                  
+                      
+                  ))
+              }
+
+          </Grid>
+            )
           }
 
-      </Grid>
+     
 
       <Button 
         sx={{ marginTop:'15px' }}

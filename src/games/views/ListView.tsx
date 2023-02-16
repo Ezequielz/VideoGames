@@ -10,6 +10,7 @@ import { Game } from "../interfaces/game";
 import Button from '@mui/material/Button/Button';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import { GameCardList } from '../components/GameCardList';
 
 
 interface Props {
@@ -17,9 +18,10 @@ interface Props {
   selectedPlatform: number[];
   selectedTags: string[];
   selectedPublishers: string[];
+  view:string;
 }
 
-export const ListView: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers }) => {
+export const ListView: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers , view}) => {
 
   const { gamesQuery, page, nextPage, prevPage } = useGames({ genres: selectedGenres, platforms: selectedPlatform, tags: selectedTags, publishers: selectedPublishers });
   const { data } = gamesQuery
@@ -44,34 +46,77 @@ export const ListView: FC<Props> = ({ selectedGenres, selectedPlatform,selectedT
 
   return (
 
-    <Box>
+    <Box >
 
-      <Grid container spacing={2}>
-              
-          {
-              data?.results.map( (game:Game) =>(
+      {
+        view === 'module'
+         ? (
+          <Grid container spacing={2}>
                   
-                  <Grid
-                      key={ game.id }
-                      item
-                      xs={6} 
-                      sm={4}
-                      md={3} 
-                  >
+              {
+                  data?.results.map( (game:Game) =>(
+                      
+                      <Grid
+                          key={ game.id }
+                          item
+                          xs={6} 
+                          sm={4}
+                          md={3} 
+                      >
 
-                          <CardActionArea>
-                              
-                              <GameCard game={game} />
+                              <CardActionArea>
+                                  
+                                  <GameCard game={game} />
 
-                          </CardActionArea>
+                              </CardActionArea>
 
-                  </Grid>
-              
+                      </Grid>
                   
-              ))
-          }
+                      
+                  ))
+              }
 
-      </Grid>
+          </Grid>
+          )
+          :(
+          <Grid container spacing={2}>
+                  
+              {
+                  data?.results.map( (game:Game) =>(
+                      
+                      <Grid
+                          key={ game.id }
+                          item
+                          xs={12} 
+                       
+                      >
+
+                              <CardActionArea>
+                                  
+                                   <GameCardList  game={game} />
+
+                              </CardActionArea>
+
+                      </Grid>
+                  
+                      
+                  ))
+              }
+
+          </Grid>
+            // <Grid container spacing={2}>
+            //   {
+            //     data?.results.map( (game:Game) => (
+            //       <CardActionArea key={game.id} sx={{ padding:'3px' }}>
+
+            //         <GameCardList  game={game} />
+            //       </CardActionArea>
+            //     ))
+            //   }
+            // </Grid>
+    
+          )
+      }
 
           <Box sx={{
             display:'flex',
