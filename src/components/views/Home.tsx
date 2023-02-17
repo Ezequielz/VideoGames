@@ -22,7 +22,7 @@ import Filter1OutlinedIcon from '@mui/icons-material/Filter1Outlined';
 export const Home: FC = () => {
 
 const [infinite, setInfinite] = useState(false)
-const [view, setView] = useState('list');
+const [view, setView] = useState('module');
 
 const [selectedGenres, setSelectedGenres] = useState<string[]>([])
 const [selectedTags, setSelectedTags] = useState<string[]>([])

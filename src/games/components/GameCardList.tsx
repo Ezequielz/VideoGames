@@ -1,8 +1,9 @@
 import { FC } from "react"
 import { useNavigate } from "react-router"
 import { useQueryClient } from "@tanstack/react-query"
-import * as dayjs from 'dayjs'
-import { Box, Card, CardContent, CardMedia, Chip, Typography } from "@mui/material"
+
+import moment from 'moment';
+import { Box, Card, CardMedia, Typography } from "@mui/material"
 import { Game } from "../interfaces/game"
 
 
@@ -27,6 +28,9 @@ export const GameCardList: FC<Props> = ({game}) => {
         );
 
     }
+
+   
+    const released = moment(game?.released).format('DD MMMM YYYY');
 
   return (
     <Card 
@@ -78,7 +82,7 @@ export const GameCardList: FC<Props> = ({game}) => {
                 <Typography variant="body2"  >Released</Typography>
                
 
-                    <Typography variant="caption" sx={{ padding:'2px' }}>{dayjs(game?.released).format('DD MMMM YYYY')}</Typography>
+                    <Typography variant="caption" sx={{ padding:'2px' }}>{released}</Typography>
 
                </Box>
 

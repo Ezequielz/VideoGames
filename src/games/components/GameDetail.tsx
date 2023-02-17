@@ -1,8 +1,8 @@
 import { FC } from "react"
 import { useNavigate } from "react-router";
 
-import { Box, Grid, Typography,Divider, Card, CardMedia, CardContent, CardActions, Button, Link } from "@mui/material"
-import * as dayjs from 'dayjs'
+import { Box, Grid, Typography,Divider, Button, Link } from "@mui/material"
+import moment from 'moment';
 
 import { LoadingIcon, SlideShow } from "../../components/ui";
 import { Screenshots } from "../interfaces";
@@ -19,7 +19,7 @@ interface Props {
 export const GameDetail: FC<Props> = ({ game, screenshots }) => {
 
     
-    var released = dayjs(game?.released).format('DD MMMM YYYY');
+    const released = moment(game?.released).format('DD MMMM YYYY');
     const navigate = useNavigate();
 
 
