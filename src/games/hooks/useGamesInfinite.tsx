@@ -11,6 +11,7 @@ interface Props {
     tags?: string[];
     publishers?: string[];
     page?: number
+    searchTerm?: string;
   }
 
   interface QueryProps {
@@ -21,13 +22,16 @@ interface Props {
   const API_KEY = import.meta.env.VITE_rawg_API_KEY
 
   const getGames = async( { pageParam =1, queryKey }: QueryProps ):Promise<Game[]> => {
-    console.log('pagearamas',pageParam)
+    
     const [,, args ] = queryKey;
     
-    const { genres = [], platforms = [], tags = [], publishers = [] } = args as Props;
+    const { genres = [], platforms = [], tags = [], publishers = [],searchTerm } = args as Props;
 
     const params = new URLSearchParams();
 
+    if ( searchTerm ) {
+      params.append('search', searchTerm)
+    }
     if ( genres.length > 0 ) {
       const genresStrings = genres.join(',')
       params.append('genres', genresStrings);
@@ -52,10 +56,10 @@ interface Props {
     return data.results;
   }
 
-export const useGamesInfinite = ({ genres, platforms, tags, publishers }: Props) => {
+export const useGamesInfinite = ({ genres, platforms, tags, publishers, searchTerm }: Props) => {
 
     const gamesQuery = useInfiniteQuery(
-        ['games', 'infinite', { genres, platforms, tags, publishers}],
+        ['games', 'infinite', { genres, platforms, tags, publishers, searchTerm}],
         (data) => getGames( data ),
         {
             

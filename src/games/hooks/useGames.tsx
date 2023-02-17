@@ -10,14 +10,18 @@ interface Props {
   tags?: string[];
   publishers?: string[];
   page?: number
+  searchTerm?: string;
 }
 
 const API_KEY = import.meta.env.VITE_rawg_API_KEY
 
-const getGames = async({ genres = [], platforms = [], tags = [], publishers = [], page = 1 }: Props):Promise<Games> => {
+const getGames = async({ genres = [], platforms = [], tags = [], publishers = [], page = 1, searchTerm }: Props):Promise<Games> => {
 
     const params = new URLSearchParams();
-
+    
+    if ( searchTerm ) {
+      params.append('search', searchTerm)
+    }
     if ( genres.length > 0 ) {
       const genresStrings = genres.join(',')
       params.append('genres', genresStrings);
@@ -43,18 +47,18 @@ const getGames = async({ genres = [], platforms = [], tags = [], publishers = []
   }
 
 
-export const useGames = ({ genres, platforms, tags, publishers }: Props) => {
+export const useGames = ({ genres, platforms, tags, publishers, searchTerm }: Props) => {
 
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     setPage(1)
-  }, [genres, platforms, tags, publishers]);
+  }, [genres, platforms, tags, publishers, searchTerm]);
   
 
     const gamesQuery = useQuery(
-        ['games', { genres, platforms, tags, publishers, page}],
-        () => getGames({ genres, platforms, tags, publishers, page }),
+        ['games', { genres, platforms, tags, publishers, page, searchTerm}],
+        () => getGames({ genres, platforms, tags, publishers, page, searchTerm }),
         {
           refetchOnWindowFocus: false,
           staleTime: 60* 1000 * 60,

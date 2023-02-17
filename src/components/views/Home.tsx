@@ -23,6 +23,7 @@ export const Home: FC = () => {
 
 const [infinite, setInfinite] = useState(false)
 const [view, setView] = useState('module');
+const [searchTerm, setSearchTerm] = useState('')
 
 const [selectedGenres, setSelectedGenres] = useState<string[]>([])
 const [selectedTags, setSelectedTags] = useState<string[]>([])
@@ -61,6 +62,12 @@ const handleViewChange = (event: React.MouseEvent<HTMLElement>, nextView: string
 const handleInfiniteChange = (event: React.MouseEvent<HTMLElement>, infinite: boolean) => {
     setInfinite(infinite);
   };
+
+const onSearchTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
+    
+    setSearchTerm(e.target.value)
+
+}
 
   
   return (
@@ -125,9 +132,11 @@ const handleInfiniteChange = (event: React.MouseEvent<HTMLElement>, infinite: bo
                         sx={{ display: { xs: 'none', sm: 'flex', width:'50%'} }}
                         className='fadeIn'
                         autoFocus
-                        //  value={ searchTerm }
+                         value={ searchTerm }
                         //  onChange={ (e) => setSearchTerm( e.target.value ) }
+                         onChange={ onSearchTerm }
                         //  onKeyPress={ (e)=> e.key === 'Enter' ? onSearchTerm() : null }
+                        //  onKeyPress={ onSearchTerm }
                         type='text'
                         placeholder="Search Game..."
                         endAdornment={
@@ -172,6 +181,7 @@ const handleInfiniteChange = (event: React.MouseEvent<HTMLElement>, infinite: bo
                             selectedTags={selectedTags} 
                             selectedPublishers={selectedPublishers}
                             view={view} 
+                            searchTerm={searchTerm}
                         />
                         )
                         :(
@@ -181,6 +191,7 @@ const handleInfiniteChange = (event: React.MouseEvent<HTMLElement>, infinite: bo
                             selectedTags={selectedTags} 
                             selectedPublishers={selectedPublishers} 
                             view={view}
+                            searchTerm={searchTerm}
                         />
 
                     )

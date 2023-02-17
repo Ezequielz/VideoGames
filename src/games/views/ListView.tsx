@@ -19,11 +19,12 @@ interface Props {
   selectedTags: string[];
   selectedPublishers: string[];
   view:string;
+  searchTerm:string
 }
 
-export const ListView: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers , view}) => {
+export const ListView: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers , view, searchTerm}) => {
 
-  const { gamesQuery, page, nextPage, prevPage } = useGames({ genres: selectedGenres, platforms: selectedPlatform, tags: selectedTags, publishers: selectedPublishers });
+  const { gamesQuery, page, nextPage, prevPage } = useGames({ genres: selectedGenres, platforms: selectedPlatform, tags: selectedTags, publishers: selectedPublishers, searchTerm});
   const { data } = gamesQuery
 
   if ( gamesQuery.isLoading )
