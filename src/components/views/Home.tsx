@@ -1,10 +1,12 @@
 
-import { FC, useState } from 'react';
+import { FC, useState, useCallback } from 'react';
 import { Box } from '@mui/material';
-import { ClearOutlined, SearchOutlined } from '@mui/icons-material';
+import { SearchOutlined } from '@mui/icons-material';
 import { GamesLayout } from '../Layouts';
 import { ListView, ListViewInfinite } from '../../games/views';
 import { Sidebar } from '../ui';
+import debounce from "just-debounce-it";
+
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -12,17 +14,16 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ToggleButton from '@mui/material/ToggleButton';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
-import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import Filter1OutlinedIcon from '@mui/icons-material/Filter1Outlined';
-
-
 
 
 export const Home: FC = () => {
 
 const [infinite, setInfinite] = useState(false)
 const [view, setView] = useState('module');
+
+const [search, setSearch] = useState('')
 const [searchTerm, setSearchTerm] = useState('')
 
 const [selectedGenres, setSelectedGenres] = useState<string[]>([])
@@ -63,9 +64,20 @@ const handleInfiniteChange = (event: React.MouseEvent<HTMLElement>, infinite: bo
     setInfinite(infinite);
   };
 
+const debouncedGetGame = useCallback(
+    debounce((search: string) => {
+    console.log('search', search)
+    setSearchTerm(search);
+}, 300)
+, [searchTerm]
+)
+
 const onSearchTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
-    
-    setSearchTerm(e.target.value)
+
+    const newSearch = e.target.value;
+    if ( newSearch.startsWith(' ') ) return
+    setSearch(newSearch);
+    debouncedGetGame(newSearch)
 
 }
 
@@ -132,7 +144,7 @@ const onSearchTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
                         sx={{ display: { xs: 'none', sm: 'flex', width:'50%'} }}
                         className='fadeIn'
                         autoFocus
-                         value={ searchTerm }
+                         value={ search }
                         //  onChange={ (e) => setSearchTerm( e.target.value ) }
                          onChange={ onSearchTerm }
                         //  onKeyPress={ (e)=> e.key === 'Enter' ? onSearchTerm() : null }
