@@ -19,11 +19,13 @@ interface Props {
   selectedPublishers: string[];
   view: string;
   searchTerm?:string;
+  order?:string;
+
 }
 
-export const ListViewInfinite: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers, view, searchTerm }) => {
+export const ListViewInfinite: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers, view, searchTerm, order }) => {
 
-  const { gamesQuery } = useGamesInfinite({ genres: selectedGenres, platforms: selectedPlatform, tags: selectedTags, publishers: selectedPublishers, searchTerm });
+  const { gamesQuery } = useGamesInfinite({ genres: selectedGenres, platforms: selectedPlatform, tags: selectedTags, publishers: selectedPublishers, searchTerm,order });
   const data = gamesQuery.data?.pages.flat()
 
   if ( gamesQuery.isLoading )

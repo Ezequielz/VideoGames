@@ -12,6 +12,7 @@ interface Props {
     publishers?: string[];
     page?: number
     searchTerm?: string;
+    order?: string;
   }
 
   interface QueryProps {
@@ -25,10 +26,15 @@ interface Props {
     
     const [,, args ] = queryKey;
     
-    const { genres = [], platforms = [], tags = [], publishers = [],searchTerm } = args as Props;
+    const { genres = [], platforms = [], tags = [], publishers = [],searchTerm, order } = args as Props;
 
     const params = new URLSearchParams();
 
+    if( order ) {
+
+      params.append('ordering', order);
+      params.append('search_exact', 'true');
+    }
     if ( searchTerm ) {
       params.append('search', searchTerm)
     }
@@ -56,10 +62,10 @@ interface Props {
     return data.results;
   }
 
-export const useGamesInfinite = ({ genres, platforms, tags, publishers, searchTerm }: Props) => {
+export const useGamesInfinite = ({ genres, platforms, tags, publishers, searchTerm,order }: Props) => {
 
     const gamesQuery = useInfiniteQuery(
-        ['games', 'infinite', { genres, platforms, tags, publishers, searchTerm}],
+        ['games', 'infinite', { genres, platforms, tags, publishers, searchTerm, order}],
         (data) => getGames( data ),
         {
             

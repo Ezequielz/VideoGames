@@ -1,6 +1,6 @@
 
 import { FC, useState, useCallback } from 'react';
-import { Box } from '@mui/material';
+import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { SearchOutlined } from '@mui/icons-material';
 import { GamesLayout } from '../Layouts';
 import { ListView, ListViewInfinite } from '../../games/views';
@@ -22,6 +22,12 @@ export const Home: FC = () => {
 
 const [infinite, setInfinite] = useState(false)
 const [view, setView] = useState('module');
+
+const [orderBy, setOrderBy] = useState('');
+
+const handleOrderChange = (event: SelectChangeEvent<string>) => {
+    setOrderBy(event.target.value);
+};
 
 const [search, setSearch] = useState('')
 const [searchTerm, setSearchTerm] = useState('')
@@ -162,6 +168,24 @@ const onSearchTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
                         }
                     />
 
+                    <FormControl sx={{ width:'200px' }}>
+                    <InputLabel id="demo-simple-select-label">Order</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={orderBy}
+                            label="Order"
+                            onChange={handleOrderChange}
+                        >
+                            <MenuItem value={'name'}>Name A-Z </MenuItem>
+                            <MenuItem value={'-name'}>Name Z-A </MenuItem>
+                            <MenuItem value={'released'}>Released -+</MenuItem>
+                            <MenuItem value={'-released'}>Released +-</MenuItem>
+                            <MenuItem value={''}>Default</MenuItem>
+                        </Select>
+                    </FormControl>
+
+
                     <ToggleButtonGroup
                     sx={{ padding:'15px 0' }}
                         orientation="horizontal"
@@ -194,6 +218,7 @@ const onSearchTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
                             selectedPublishers={selectedPublishers}
                             view={view} 
                             searchTerm={searchTerm}
+                            order={orderBy}
                         />
                         )
                         :(
@@ -204,6 +229,7 @@ const onSearchTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
                             selectedPublishers={selectedPublishers} 
                             view={view}
                             searchTerm={searchTerm}
+                            order={orderBy}
                         />
 
                     )
