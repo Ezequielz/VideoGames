@@ -9,7 +9,7 @@ export const PublisherView = () => {
 
   const { publisher } = params;
 
-  console.log(publisher)
+  // console.log(publisher)
 
   return (
     <GamesLayout>

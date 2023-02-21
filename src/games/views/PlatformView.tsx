@@ -9,7 +9,7 @@ export const PlatformView = () => {
 
   const { platform } = params;
 
-  console.log(platform)
+  // console.log(platform)
 
   return (
     <GamesLayout>

@@ -6,7 +6,7 @@ import { Games } from "../interfaces";
 
 interface Props {
   genres?: string[];
-  platforms?: number[]
+  platforms?: string[]
   tags?: string[];
   publishers?: string[];
   page?: number

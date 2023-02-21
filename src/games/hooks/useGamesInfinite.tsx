@@ -7,7 +7,7 @@ import { Game } from "../interfaces/game";
 
 interface Props {
     genres?: string[];
-    platforms?: number[]
+    platforms?: string[]
     tags?: string[];
     publishers?: string[];
     page?: number
@@ -43,7 +43,9 @@ interface Props {
       params.append('genres', genresStrings);
     }
     if ( platforms.length > 0 ) {
-      const platformsNumber = platforms.join(',')
+      const platformToNumber = platforms.map(plat => +plat)
+ 
+      const platformsNumber = platformToNumber.join(',')
       params.append('platforms', platformsNumber);
     }
     if ( tags.length > 0 ) {

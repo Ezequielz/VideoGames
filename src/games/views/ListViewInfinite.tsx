@@ -14,7 +14,7 @@ import { GameCardList } from '../components/GameCardList';
 
 interface Props {
   selectedGenres: string[];
-  selectedPlatform: number[];
+  selectedPlatform: string[];
   selectedTags: string[];
   selectedPublishers: string[];
   view: string;

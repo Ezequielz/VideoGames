@@ -5,14 +5,15 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '
 import { LoadingIcon } from './LoadingIcon';
 import { useGenres, usePlatforms, useTags, usePublishers } from '../../games/hooks';
 import Divider from '@mui/material/Divider/Divider';
+import { CustomAcordion } from './CustomAcordion';
 
 
 
 interface Props {
     selectedGenres: string[];
     onGenreChange: ( genreSlug:string ) => void;
-    selectedPlatform: number[];
-    onPlatformChanged: ( platformID:number ) => void;
+    selectedPlatform: string[];
+    onPlatformChanged: ( platformID:string ) => void;
     selectedTags: string[];
     onTagChanged: ( tagSlug:string ) => void;
     selectedPublishers: string[];
@@ -34,137 +35,32 @@ export const Sidebar: FC<Props> = ({ selectedGenres, onGenreChange, selectedPlat
     const { data: publishers } = publisherQuery;
 
   return (
-    <Box >
+    <Box sx={{ padding: '20px' }}>
      
-
-            <Accordion>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                >
-                    <Typography>Genres</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-               {genreQuery.isLoading ?
-               ( <LoadingIcon />)
-               :
-               genres!.results.map( genre => (
-                    <Box 
-                        className={`${selectedGenres.includes(genre.slug) ? 'genre-active': 'genre'}`}
-                        key={genre.id}
-                        onClick={ () => onGenreChange( genre.slug ) }
-                        sx={{
-                           margin:'3px 1px'
-                        }}
-                    >
-
-                        <Typography>
-                        {genre.name}
-                        </Typography>
-                    </Box>
-
-                ))
-               }
-                </AccordionDetails>
-            </Accordion>
-
-            <Accordion>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                >
-                    <Typography>Platforms</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-               {genreQuery.isLoading ?
-               ( <LoadingIcon />)
-               :
-               platforms!.results.map( platform => (
-                    <Box 
-                        className={`${selectedPlatform.includes(platform.id) ? 'genre-active': 'genre'}`}
-                        key={platform.id}
-                        onClick={ () => onPlatformChanged( platform.id ) }
-                        sx={{
-                           margin:'3px 1px'
-                        }}
-                    >
-
-                        <Typography>
-                        {platform.name}
-                        </Typography>
-                    </Box>
-
-                ))
-               }
-                </AccordionDetails>
-            </Accordion>
-
-            <Accordion>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                >
-                    <Typography>Tags</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-               {genreQuery.isLoading ?
-               ( <LoadingIcon />)
-               :
-               tags!.results.map( tag => (
-                    <Box 
-                        className={`${selectedTags.includes(tag.slug) ? 'genre-active': 'genre'}`}
-                        key={tag.id}
-                        onClick={ () => onTagChanged( tag.slug ) }
-                        sx={{
-                           margin:'3px 1px'
-                        }}
-                    >
-
-                        <Typography>
-                        {tag.name}
-                        </Typography>
-                    </Box>
-
-                ))
-               }
-                </AccordionDetails>
-            </Accordion>
-
-            <Accordion>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                >
-                    <Typography>Publishers</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-               {genreQuery.isLoading ?
-               ( <LoadingIcon />)
-               :
-               publishers!.results.map( publisher => (
-                    <Box 
-                        className={`${selectedPublishers.includes(publisher.slug) ? 'genre-active': 'genre'}`}
-                        key={publisher.id}
-                        onClick={ () => onPublisherChanged( publisher.slug ) }
-                        sx={{
-                           margin:'3px 1px'
-                        }}
-                    >
-
-                        <Typography>
-                        {publisher.name}
-                        </Typography>
-                    </Box>
-
-                ))
-               }
-                </AccordionDetails>
-            </Accordion>
-
+            <CustomAcordion 
+                title={'Genres'}
+                array={genres.results}
+                selected={selectedGenres}
+                onChanged={onGenreChange}
+            />
+            <CustomAcordion 
+                title={'Platforms'}
+                array={platforms.results}
+                selected={selectedPlatform}
+                onChanged={onPlatformChanged}
+            />
+            <CustomAcordion 
+                title={'Tags'}
+                array={tags.results}
+                selected={selectedTags}
+                onChanged={onGenreChange}
+            />
+            <CustomAcordion 
+                title={'Publishers'}
+                array={publishers.results}
+                selected={selectedPublishers}
+                onChanged={onPublisherChanged}
+            />
 
    
 

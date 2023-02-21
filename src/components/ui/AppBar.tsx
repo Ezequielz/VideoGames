@@ -1,0 +1,141 @@
+import { FC, useCallback, useState } from "react";
+import { Box, FormControl, IconButton, Input, InputAdornment, InputLabel, MenuItem, Select, SelectChangeEvent, ToggleButton, ToggleButtonGroup } from "@mui/material"
+import ViewListIcon from '@mui/icons-material/ViewList';
+import ViewModuleIcon from '@mui/icons-material/ViewModule';
+import { SearchOutlined } from "@mui/icons-material";
+import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
+import Filter1OutlinedIcon from '@mui/icons-material/Filter1Outlined';
+import debounce from "just-debounce-it";
+
+
+interface Props {
+    setOrderBy: (event:string) => void;
+    setView: (event:string) => void;
+    setSearchTerm: (search:string) => void;
+    setInfinite: (event:boolean) => void;
+    searchTerm:string;
+    view:string;
+    orderBy:string;
+    infinite:boolean;
+}
+
+
+export const AppBar:FC<Props> = ({setOrderBy, setView, setInfinite, setSearchTerm, searchTerm, view, orderBy, infinite}) => {
+
+    const [search, setSearch] = useState('')
+
+    const handleOrderChange = (event: SelectChangeEvent<string>) => {
+        setOrderBy(event.target.value);
+    };
+
+    const handleViewChange = (event: React.MouseEvent<HTMLElement>, nextView: string) => {
+        setView(nextView);
+      };
+    
+    const handleInfiniteChange = (event: React.MouseEvent<HTMLElement>, infinite: boolean) => {
+        setInfinite(infinite);
+      };
+
+    const onSearchTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        const newSearch = e.target.value;
+        if ( newSearch.startsWith(' ') ) return
+        setSearch(newSearch);
+        debouncedGetGame(newSearch)
+
+    }
+
+    const debouncedGetGame = useCallback(
+        debounce((search: string) => {
+        // console.log('search', search)
+        setSearchTerm(search);
+    }, 300)
+    , [searchTerm]
+    )
+
+
+  return (
+    <Box sx={{
+        display:'flex',
+        justifyContent:'space-between',
+        alignItems:'center',
+      
+    }}>
+
+        <ToggleButtonGroup
+        sx={{ padding:'15px 0' }}
+            orientation="horizontal"
+            value={view}
+            exclusive
+            onChange={handleViewChange}
+        >
+            <ToggleButton value="list" aria-label="list">
+                <ViewListIcon />
+            </ToggleButton>
+            <ToggleButton value="module" aria-label="module">
+                <ViewModuleIcon />
+            </ToggleButton>
+
+        </ToggleButtonGroup>
+
+       
+        <Input
+            sx={{ display: { xs: 'none', sm: 'flex', width:'50%'} }}
+            className='fadeIn'
+            autoFocus
+             value={ search }
+            //  onChange={ (e) => setSearchTerm( e.target.value ) }
+             onChange={ onSearchTerm }
+            //  onKeyPress={ (e)=> e.key === 'Enter' ? onSearchTerm() : null }
+            //  onKeyPress={ onSearchTerm }
+            type='text'
+            placeholder="Search Game..."
+            endAdornment={
+                <InputAdornment position="end">
+                    <IconButton
+                        //    onClick={ () => setIsSearchVisible(false) }
+                    >
+                    <SearchOutlined />
+                    </IconButton>
+                </InputAdornment>
+            }
+        />
+
+        <FormControl sx={{ width:'200px' }}>
+        <InputLabel id="demo-simple-select-label">Order</InputLabel>
+            <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={orderBy}
+                label="Order"
+                onChange={handleOrderChange}
+            >
+                <MenuItem value={'name'}>Name A-Z </MenuItem>
+                <MenuItem value={'-name'}>Name Z-A </MenuItem>
+                <MenuItem value={'released'}>Released -+</MenuItem>
+                <MenuItem value={'-released'}>Released +-</MenuItem>
+                <MenuItem value={''}>Default</MenuItem>
+            </Select>
+        </FormControl>
+
+
+        <ToggleButtonGroup
+        sx={{ padding:'15px 0' }}
+            orientation="horizontal"
+            value={infinite}
+            exclusive
+            onChange={handleInfiniteChange}
+        >
+            <ToggleButton value={true} aria-label="infinite">
+                <AllInclusiveIcon />
+            </ToggleButton>
+            <ToggleButton value={false} aria-label="pagination">
+                <Filter1OutlinedIcon />
+            </ToggleButton>
+
+
+        </ToggleButtonGroup>
+    </Box>
+
+  )
+}

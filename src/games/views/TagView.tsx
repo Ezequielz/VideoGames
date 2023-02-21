@@ -9,7 +9,7 @@ export const TagView = () => {
 
   const { tag } = params;
 
-  console.log(tag)
+  // console.log(tag)
 
   return (
     <GamesLayout>
