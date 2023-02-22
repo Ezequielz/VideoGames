@@ -1,12 +1,10 @@
-import { FC } from "react"
+import { FC, useContext } from 'react';
+import { UiContext } from '../../context/ui';
 import { ListView, ListViewInfinite } from "../views";
 
 interface Props {
 
     searchTerm:string;
-    view:string;
-    orderBy:string;
-    infinite:boolean;
     selectedGenres:string[];
     selectedPublishers:string[];
     selectedPlatform:string[];
@@ -14,7 +12,8 @@ interface Props {
 }
 
 
-export const GameViews:FC<Props> = ({searchTerm, view, orderBy, infinite,selectedGenres, selectedPublishers, selectedPlatform, selectedTags}) => {
+export const GameViews:FC<Props> = ({searchTerm,selectedGenres, selectedPublishers, selectedPlatform, selectedTags}) => {
+    const { infinite } = useContext( UiContext )
   return (
     <>
     
@@ -27,9 +26,8 @@ export const GameViews:FC<Props> = ({searchTerm, view, orderBy, infinite,selecte
                     selectedPlatform={selectedPlatform} 
                     selectedTags={selectedTags} 
                     selectedPublishers={selectedPublishers}
-                    view={view} 
                     searchTerm={searchTerm}
-                    order={orderBy}
+                  
                 />
                 )
                 :(
@@ -38,9 +36,8 @@ export const GameViews:FC<Props> = ({searchTerm, view, orderBy, infinite,selecte
                     selectedPlatform={selectedPlatform} 
                     selectedTags={selectedTags} 
                     selectedPublishers={selectedPublishers} 
-                    view={view}
                     searchTerm={searchTerm}
-                    order={orderBy}
+                  
                 />
 
             )

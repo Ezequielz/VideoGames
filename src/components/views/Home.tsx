@@ -10,13 +10,11 @@ import { useFilters } from '../../games/hooks';
 
 
 
+
 export const Home: FC = () => {
 
-
+   
 const [searchTerm, setSearchTerm] = useState('')
-const [view, setView] = useState('module');
-const [orderBy, setOrderBy] = useState('');
-const [infinite, setInfinite] = useState(false)
 
 const { onGenreChanged,onPlatformChanged,onPublisherChanged,onTagChanged,
     selectedGenres,selectedPlatform,selectedPublishers,selectedTags } = useFilters()
@@ -46,25 +44,13 @@ const { onGenreChanged,onPlatformChanged,onPublisherChanged,onTagChanged,
                 >
                     
                     <AppBar 
-                        setOrderBy={setOrderBy}
-                        setView={setView}
-                        setInfinite={setInfinite}
                         setSearchTerm={setSearchTerm}
                         searchTerm={searchTerm}
-                        view={view}
-                        orderBy={orderBy}
-                        infinite={infinite} 
                     />
             
                     <Games 
-                        setOrderBy={setOrderBy}
-                        setView={setView}
-                        setInfinite={setInfinite}
                         setSearchTerm={setSearchTerm}
                         searchTerm={searchTerm}
-                        view={view}
-                        orderBy={orderBy}
-                        infinite={infinite} 
                         selectedGenres={selectedGenres}
                         selectedPublishers={selectedPublishers}
                         selectedPlatform={selectedPlatform}

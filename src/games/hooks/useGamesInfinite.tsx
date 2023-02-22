@@ -43,9 +43,7 @@ interface Props {
       params.append('genres', genresStrings);
     }
     if ( platforms.length > 0 ) {
-      const platformToNumber = platforms.map(plat => +plat)
- 
-      const platformsNumber = platformToNumber.join(',')
+      const platformsNumber = platforms.join(',')
       params.append('platforms', platformsNumber);
     }
     if ( tags.length > 0 ) {

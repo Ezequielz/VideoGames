@@ -5,14 +5,8 @@ import { GameViews } from './GameViews';
 
 
 interface Props {
-    setOrderBy: (event:string) => void;
-    setView: (event:string) => void;
     setSearchTerm: (search:string) => void;
-    setInfinite: (event:boolean) => void;
     searchTerm:string;
-    view:string;
-    orderBy:string;
-    infinite:boolean;
     selectedGenres:string[];
     selectedPublishers:string[];
     selectedPlatform:string[];
@@ -20,7 +14,7 @@ interface Props {
 }
 
 
-export const Games:FC<Props> = ({setOrderBy, setView, setInfinite, setSearchTerm, searchTerm, view, orderBy, infinite,selectedGenres, selectedPublishers, selectedPlatform, selectedTags}) => {
+export const Games:FC<Props> = ({ setSearchTerm, searchTerm,selectedGenres, selectedPublishers, selectedPlatform, selectedTags}) => {
 
   
   return (
@@ -28,9 +22,6 @@ export const Games:FC<Props> = ({setOrderBy, setView, setInfinite, setSearchTerm
 
         <GameViews
             searchTerm={searchTerm}
-            view={view}
-            orderBy={orderBy}
-            infinite={infinite} 
             selectedGenres={selectedGenres}
             selectedPublishers={selectedPublishers}
             selectedPlatform={selectedPlatform}

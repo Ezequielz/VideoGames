@@ -1,5 +1,5 @@
 
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { CardActionArea, Grid } from "@mui/material"
 import {Box, Typography} from '@mui/material';
 import Button from '@mui/material/Button/Button';
@@ -9,6 +9,7 @@ import { GameCard } from "../components"
 import { useGamesInfinite } from '../hooks';
 import { Game } from "../interfaces/game";
 import { GameCardList } from '../components/GameCardList';
+import { UiContext } from '../../context/ui';
 
 
 
@@ -17,15 +18,13 @@ interface Props {
   selectedPlatform: string[];
   selectedTags: string[];
   selectedPublishers: string[];
-  view: string;
   searchTerm?:string;
-  order?:string;
-
 }
 
-export const ListViewInfinite: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers, view, searchTerm, order }) => {
 
-  const { gamesQuery } = useGamesInfinite({ genres: selectedGenres, platforms: selectedPlatform, tags: selectedTags, publishers: selectedPublishers, searchTerm,order });
+export const ListViewInfinite: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers, searchTerm }) => {
+  const { view, order } = useContext( UiContext )
+  const { gamesQuery } = useGamesInfinite({ genres: selectedGenres, platforms: selectedPlatform, tags: selectedTags, publishers: selectedPublishers, searchTerm, order });
   const data = gamesQuery.data?.pages.flat()
 
   if ( gamesQuery.isLoading )

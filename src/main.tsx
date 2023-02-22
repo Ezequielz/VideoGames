@@ -4,24 +4,27 @@ import ReactDOM from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import { CssBaseline } from '@mui/material';
-import { ThemeProvider } from '@mui/material/styles';
 
 
-import { darkTheme } from './themes';
 import './index.css'
 import { App } from './App';
+import { FiltersProvider } from './context/filters';
+import { UiProvider } from './context/ui';
 
 const client = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <ThemeProvider theme={darkTheme}>
-        <CssBaseline />
-          <QueryClientProvider client={ client }>
-            <ReactQueryDevtools />
-              <App />
-          </QueryClientProvider>
-    </ThemeProvider>
+    <UiProvider>
+      <FiltersProvider>
+      
+            
+              <QueryClientProvider client={ client }>
+                <ReactQueryDevtools />
+                  <App />
+              </QueryClientProvider>
+    
+      </FiltersProvider>
+    </UiProvider>
   </React.StrictMode>,
 )

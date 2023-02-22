@@ -1,5 +1,5 @@
 
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { CardActionArea, Grid } from "@mui/material"
 import { LoadingIcon } from "../../components/ui";
 import { GameCard } from "../components"
@@ -11,6 +11,7 @@ import Button from '@mui/material/Button/Button';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import { GameCardList } from '../components/GameCardList';
+import { UiContext } from '../../context/ui';
 
 
 interface Props {
@@ -18,13 +19,14 @@ interface Props {
   selectedPlatform: string[];
   selectedTags: string[];
   selectedPublishers: string[];
-  view?:string;
   searchTerm?:string;
-  order?:string;
+
 }
 
-export const ListView: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers , view, searchTerm, order}) => {
+export const ListView: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers , searchTerm}) => {
 
+  
+  const { view, order } = useContext( UiContext )
   const { gamesQuery, page, nextPage, prevPage } = useGames({ genres: selectedGenres, platforms: selectedPlatform, tags: selectedTags, publishers: selectedPublishers, searchTerm, order});
   const { data } = gamesQuery
 

@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useContext, useState } from "react";
 import { Box, FormControl, IconButton, Input, InputAdornment, InputLabel, MenuItem, Select, SelectChangeEvent, ToggleButton, ToggleButtonGroup } from "@mui/material"
 import ViewListIcon from '@mui/icons-material/ViewList';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
@@ -6,30 +6,29 @@ import { SearchOutlined } from "@mui/icons-material";
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import Filter1OutlinedIcon from '@mui/icons-material/Filter1Outlined';
 import debounce from "just-debounce-it";
+import { UiContext } from "../../context/ui";
 
 
 interface Props {
-    setOrderBy: (event:string) => void;
-    setView: (event:string) => void;
     setSearchTerm: (search:string) => void;
-    setInfinite: (event:boolean) => void;
     searchTerm:string;
-    view:string;
-    orderBy:string;
-    infinite:boolean;
 }
 
 
-export const AppBar:FC<Props> = ({setOrderBy, setView, setInfinite, setSearchTerm, searchTerm, view, orderBy, infinite}) => {
+export const AppBar:FC<Props> = ({ setSearchTerm, searchTerm  }) => {
 
+    const  { view, viewList, viewModule, infinite, setInfinite, order, orderBy} = useContext( UiContext )
     const [search, setSearch] = useState('')
 
     const handleOrderChange = (event: SelectChangeEvent<string>) => {
-        setOrderBy(event.target.value);
+        orderBy(event.target.value);
     };
 
     const handleViewChange = (event: React.MouseEvent<HTMLElement>, nextView: string) => {
-        setView(nextView);
+        event.preventDefault()
+       if ( nextView === 'list' ) return viewList();
+
+       viewModule()
       };
     
     const handleInfiniteChange = (event: React.MouseEvent<HTMLElement>, infinite: boolean) => {
@@ -68,8 +67,9 @@ export const AppBar:FC<Props> = ({setOrderBy, setView, setInfinite, setSearchTer
             value={view}
             exclusive
             onChange={handleViewChange}
+            
         >
-            <ToggleButton value="list" aria-label="list">
+            <ToggleButton value="list" aria-label="list" >
                 <ViewListIcon />
             </ToggleButton>
             <ToggleButton value="module" aria-label="module">
@@ -106,7 +106,7 @@ export const AppBar:FC<Props> = ({setOrderBy, setView, setInfinite, setSearchTer
             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={orderBy}
+                value={order}
                 label="Order"
                 onChange={handleOrderChange}
             >
