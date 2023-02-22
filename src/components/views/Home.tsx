@@ -13,9 +13,6 @@ import { Games } from '../../games/components';
 
 export const Home: FC = () => {
 
-   
-const [searchTerm, setSearchTerm] = useState('')
-
   return (
       <GamesLayout>
 
@@ -31,15 +28,9 @@ const [searchTerm, setSearchTerm] = useState('')
                     }}
                 >
                     
-                    <AppBar 
-                        setSearchTerm={setSearchTerm}
-                        searchTerm={searchTerm}
-                    />
+                    <AppBar />
             
-                    <Games 
-                        setSearchTerm={setSearchTerm}
-                        searchTerm={searchTerm}
-                    />
+                    <Games />
                 </Box>
 
         </Box>

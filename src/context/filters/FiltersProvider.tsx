@@ -7,7 +7,7 @@ export interface FiltersState {
     selectedPublishers: string[];
     selectedTags: string[];
     selectedPlatform: string[];
-
+    search: string;
 }
 
 
@@ -16,7 +16,7 @@ const FILTERS_INITIAL_STATE: FiltersState = {
     selectedPublishers: [],
     selectedTags: [],
     selectedPlatform: [],
-
+    search: '',
 }
 
 interface Props {
@@ -41,7 +41,7 @@ export const FiltersProvider:FC<Props> = ({ children }) => {
    const setSelectedPlatform = ( platform:string ) => {
     dispatch({ type: '[Filters] - Platform', payload: platform })
    };
-   const search = ( search:string ) => {
+   const setSearch = ( search:string ) => {
     dispatch({ type: '[Filters] - Search', payload: search })
    };
    
@@ -56,7 +56,7 @@ export const FiltersProvider:FC<Props> = ({ children }) => {
           setSelectedPublishers,
           setSelectedTags,
           setSelectedPlatform,
-          search,
+          setSearch,
        }} >
          { children }
        </FiltersContext.Provider>

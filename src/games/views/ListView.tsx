@@ -1,5 +1,5 @@
 
-import { FC, useContext } from 'react';
+import { useContext } from 'react';
 import { CardActionArea, Grid } from "@mui/material"
 import { LoadingIcon } from "../../components/ui";
 import { GameCard } from "../components"
@@ -12,19 +12,16 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import { GameCardList } from '../components/GameCardList';
 import { UiContext } from '../../context/ui';
+import { FiltersContext } from '../../context/filters';
 
 
-interface Props {
-
-  searchTerm?:string;
-
-}
-
-export const ListView: FC<Props> = ({ searchTerm }) => {
+export const ListView = () => {
 
   
-  const { view, order } = useContext( UiContext )
-  const { gamesQuery, page, nextPage, prevPage } = useGames({ searchTerm, order });
+  const { view, order } = useContext( UiContext );
+  const { search } = useContext( FiltersContext );
+  
+  const { gamesQuery, page, nextPage, prevPage } = useGames({ search, order });
   const { data } = gamesQuery
 
   if ( gamesQuery.isLoading )

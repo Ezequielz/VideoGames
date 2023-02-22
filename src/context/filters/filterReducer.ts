@@ -2,12 +2,12 @@
 import { FiltersState } from './';
 
 
-    // "value": {
-    //     "Genres": "Genre[]",
+    //  {
+    //     "Genres": "[]",
     //     "Publishers": "[]",
     //     "Tags": "[]",
-    //     "Platform": "[]"
-    //     "Search: string"
+    //     "Platform": "[]",
+    //     "Search: "",
     //   },
 
    type FiltersActionType = 
@@ -54,6 +54,12 @@ import { FiltersState } from './';
                                 ? state.selectedPlatform.filter( platform => platform !== action.payload )
                                 : [...state.selectedPlatform, action.payload]
                 }
+
+       case '[Filters] - Search':
+                return {
+                    ...state,
+                    search: action.payload
+                }        
 
        case '[Filters] - Clean':
                return {

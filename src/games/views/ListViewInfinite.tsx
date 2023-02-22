@@ -10,18 +10,14 @@ import { useGamesInfinite } from '../hooks';
 import { Game } from "../interfaces/game";
 import { GameCardList } from '../components/GameCardList';
 import { UiContext } from '../../context/ui';
+import { FiltersContext } from '../../context/filters';
 
 
-
-interface Props {
-
-  searchTerm?:string;
-}
-
-
-export const ListViewInfinite: FC<Props> = ({ searchTerm }) => {
+export const ListViewInfinite = () => {
   const { view, order } = useContext( UiContext )
-  const { gamesQuery } = useGamesInfinite({ searchTerm, order });
+  const { search } = useContext( FiltersContext );
+
+  const { gamesQuery } = useGamesInfinite({ search, order });
   const data = gamesQuery.data?.pages.flat()
 
   if ( gamesQuery.isLoading )

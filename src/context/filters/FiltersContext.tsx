@@ -7,13 +7,14 @@ interface ContextProps {
     selectedPublishers: string[];
     selectedTags: string[];
     selectedPlatform: string[];
+    search: string;
 
     // Methods
     setSelectedGenres: (genre: string) => void;
     setSelectedPublishers: (publisher: string) => void;
     setSelectedTags: (tag: string) => void;
     setSelectedPlatform: (platform: string) => void;
-    search: (search: string) => void;
+    setSearch: (search: string) => void;
 }
 
 

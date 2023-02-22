@@ -7,18 +7,15 @@ import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import Filter1OutlinedIcon from '@mui/icons-material/Filter1Outlined';
 import debounce from "just-debounce-it";
 import { UiContext } from "../../context/ui";
+import { FiltersContext } from '../../context/filters/FiltersContext';
 
 
-interface Props {
-    setSearchTerm: (search:string) => void;
-    searchTerm:string;
-}
 
+export const AppBar = () => {
 
-export const AppBar:FC<Props> = ({ setSearchTerm, searchTerm  }) => {
-
-    const  { view, viewList, viewModule, infinite, setInfinite, order, orderBy} = useContext( UiContext )
-    const [search, setSearch] = useState('')
+    const { view, viewList, viewModule, infinite, setInfinite, order, orderBy} = useContext( UiContext )
+    const { search, setSearch } = useContext( FiltersContext )
+    const [ searchTerm, setSearchTerm ] = useState('')
 
     const handleOrderChange = (event: SelectChangeEvent<string>) => {
         orderBy(event.target.value);
@@ -39,7 +36,7 @@ export const AppBar:FC<Props> = ({ setSearchTerm, searchTerm  }) => {
 
         const newSearch = e.target.value;
         if ( newSearch.startsWith(' ') ) return
-        setSearch(newSearch);
+        setSearchTerm(newSearch);
         debouncedGetGame(newSearch)
 
     }
@@ -47,9 +44,9 @@ export const AppBar:FC<Props> = ({ setSearchTerm, searchTerm  }) => {
     const debouncedGetGame = useCallback(
         debounce((search: string) => {
         // console.log('search', search)
-        setSearchTerm(search);
+        setSearch(search);
     }, 300)
-    , [searchTerm]
+    , [search]
     )
 
 
@@ -83,7 +80,7 @@ export const AppBar:FC<Props> = ({ setSearchTerm, searchTerm  }) => {
             sx={{ display: { xs: 'none', sm: 'flex', width:'50%'} }}
             className='fadeIn'
             autoFocus
-             value={ search }
+             value={ searchTerm }
             //  onChange={ (e) => setSearchTerm( e.target.value ) }
              onChange={ onSearchTerm }
             //  onKeyPress={ (e)=> e.key === 'Enter' ? onSearchTerm() : null }
