@@ -7,7 +7,7 @@ interface ContextProps {
    infinite?:boolean;
    theme?:string;  
    
-   
+   // Methods
     viewModule: () => void,
     viewList: () => void,
     orderBy: (order:string) => void,

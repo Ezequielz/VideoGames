@@ -5,7 +5,7 @@ export function useFilters() {
     const [selectedGenres, setSelectedGenres] = useState<string[]>([])
     const [selectedPublishers, setSelectedPublishers] = useState<string[]>([])
     const [selectedTags, setSelectedTags] = useState<string[]>([])
-      
+    
     const [selectedPlatform, setSelectedPlatform] = useState<string[]>([])
     
     const onPublisherChanged = (publisherSlug: string) => {

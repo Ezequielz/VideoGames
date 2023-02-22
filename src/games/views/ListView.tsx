@@ -15,19 +15,16 @@ import { UiContext } from '../../context/ui';
 
 
 interface Props {
-  selectedGenres: string[];
-  selectedPlatform: string[];
-  selectedTags: string[];
-  selectedPublishers: string[];
+
   searchTerm?:string;
 
 }
 
-export const ListView: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers , searchTerm}) => {
+export const ListView: FC<Props> = ({ searchTerm }) => {
 
   
   const { view, order } = useContext( UiContext )
-  const { gamesQuery, page, nextPage, prevPage } = useGames({ genres: selectedGenres, platforms: selectedPlatform, tags: selectedTags, publishers: selectedPublishers, searchTerm, order});
+  const { gamesQuery, page, nextPage, prevPage } = useGames({ searchTerm, order });
   const { data } = gamesQuery
 
   if ( gamesQuery.isLoading )

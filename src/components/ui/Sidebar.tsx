@@ -1,26 +1,16 @@
 
-import { FC } from 'react';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material'
-import { LoadingIcon } from './LoadingIcon';
+import { useContext } from 'react';
+import { Box } from '@mui/material'
+
 import { useGenres, usePlatforms, useTags, usePublishers } from '../../games/hooks';
-import Divider from '@mui/material/Divider/Divider';
+
 import { CustomAcordion } from './CustomAcordion';
+import { FiltersContext } from '../../context/filters';
 
 
 
-interface Props {
-    selectedGenres: string[];
-    onGenreChange: ( genreSlug:string ) => void;
-    selectedPlatform: string[];
-    onPlatformChanged: ( platformID:string ) => void;
-    selectedTags: string[];
-    onTagChanged: ( tagSlug:string ) => void;
-    selectedPublishers: string[];
-    onPublisherChanged: ( publisherSlug:string ) => void;
-}
 
-export const Sidebar: FC<Props> = ({ selectedGenres, onGenreChange, selectedPlatform, onPlatformChanged,selectedTags, onTagChanged, selectedPublishers, onPublisherChanged  }) => {
+export const Sidebar = () => {
 
     const { genreQuery } = useGenres();
     const { data: genres } = genreQuery;
@@ -34,6 +24,9 @@ export const Sidebar: FC<Props> = ({ selectedGenres, onGenreChange, selectedPlat
     const { publisherQuery } = usePublishers();
     const { data: publishers } = publisherQuery;
 
+    const { selectedGenres, selectedPlatform, selectedTags, selectedPublishers,
+            setSelectedGenres, setSelectedPlatform, setSelectedTags, setSelectedPublishers } = useContext( FiltersContext )
+
   return (
     <Box sx={{ padding: '20px' }}>
      
@@ -41,25 +34,25 @@ export const Sidebar: FC<Props> = ({ selectedGenres, onGenreChange, selectedPlat
                 title={'Genres'}
                 array={genres.results}
                 selected={selectedGenres}
-                onChanged={onGenreChange}
+                onChanged={setSelectedGenres}
             />
             <CustomAcordion 
                 title={'Platforms'}
                 array={platforms.results}
                 selected={selectedPlatform}
-                onChanged={onPlatformChanged}
+                onChanged={setSelectedPlatform}
             />
             <CustomAcordion 
                 title={'Tags'}
                 array={tags.results}
                 selected={selectedTags}
-                onChanged={onGenreChange}
+                onChanged={setSelectedTags}
             />
             <CustomAcordion 
                 title={'Publishers'}
                 array={publishers.results}
                 selected={selectedPublishers}
-                onChanged={onPublisherChanged}
+                onChanged={setSelectedPublishers}
             />
 
    

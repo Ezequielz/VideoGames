@@ -52,6 +52,8 @@ export const UiProvider:FC<Props> = ({ children }) => {
        <UiContext.Provider value={{
           ...state,
 
+
+            // Methods
             viewModule,
             viewList,
             orderBy,

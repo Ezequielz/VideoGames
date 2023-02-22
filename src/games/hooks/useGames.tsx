@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useQuery } from "@tanstack/react-query";
 
 import { rawgApi } from "../../api/rawgApi";
 import { Games } from "../interfaces";
+import { FiltersContext } from '../../context/filters';
 
 interface Props {
   genres?: string[];
@@ -52,9 +53,10 @@ const getGames = async({ genres = [], platforms = [], tags = [], publishers = []
   }
 
 
-export const useGames = ({ genres, platforms, tags, publishers, searchTerm, order }: Props) => {
+export const useGames = ({ searchTerm, order }: Props) => {
 
   const [page, setPage] = useState(1);
+  const { selectedGenres: genres, selectedPlatform: platforms, selectedTags: tags, selectedPublishers: publishers } = useContext( FiltersContext );
 
   useEffect(() => {
     setPage(1)

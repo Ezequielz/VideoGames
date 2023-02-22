@@ -2,12 +2,14 @@ import { useInfiniteQuery } from "@tanstack/react-query"
 import { rawgApi } from "../../api/rawgApi";
 import { Games } from "../interfaces";
 import { Game } from "../interfaces/game";
+import { useContext } from 'react';
+import { FiltersContext } from "../../context/filters";
 
 
 
 interface Props {
     genres?: string[];
-    platforms?: string[]
+    platforms?: string[];
     tags?: string[];
     publishers?: string[];
     page?: number
@@ -62,7 +64,9 @@ interface Props {
     return data.results;
   }
 
-export const useGamesInfinite = ({ genres, platforms, tags, publishers, searchTerm,order }: Props) => {
+export const useGamesInfinite = ({ searchTerm,order }: Props) => {
+
+    const { selectedGenres: genres, selectedPlatform: platforms, selectedTags: tags, selectedPublishers: publishers } = useContext( FiltersContext );
 
     const gamesQuery = useInfiniteQuery(
         ['games', 'infinite', { genres, platforms, tags, publishers, searchTerm, order}],

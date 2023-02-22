@@ -14,17 +14,14 @@ import { UiContext } from '../../context/ui';
 
 
 interface Props {
-  selectedGenres: string[];
-  selectedPlatform: string[];
-  selectedTags: string[];
-  selectedPublishers: string[];
+
   searchTerm?:string;
 }
 
 
-export const ListViewInfinite: FC<Props> = ({ selectedGenres, selectedPlatform,selectedTags, selectedPublishers, searchTerm }) => {
+export const ListViewInfinite: FC<Props> = ({ searchTerm }) => {
   const { view, order } = useContext( UiContext )
-  const { gamesQuery } = useGamesInfinite({ genres: selectedGenres, platforms: selectedPlatform, tags: selectedTags, publishers: selectedPublishers, searchTerm, order });
+  const { gamesQuery } = useGamesInfinite({ searchTerm, order });
   const data = gamesQuery.data?.pages.flat()
 
   if ( gamesQuery.isLoading )
