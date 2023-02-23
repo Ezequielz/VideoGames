@@ -1,9 +1,8 @@
 import { useContext } from "react";
-import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, ToggleButton, ToggleButtonGroup } from "@mui/material"
+import { Box, SelectChangeEvent, ToggleButton, ToggleButtonGroup } from "@mui/material"
 import ViewListIcon from '@mui/icons-material/ViewList';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
-import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
-import Filter1OutlinedIcon from '@mui/icons-material/Filter1Outlined';
+
 import { UiContext } from "../../context/ui";
 import { Search } from "./Search";
 
@@ -11,12 +10,10 @@ import { Search } from "./Search";
 
 export const CustomBar = () => {
 
-    const { view, viewList, viewModule, infinite, setInfinite, order, orderBy} = useContext( UiContext )
+    const { view, viewList, viewModule } = useContext( UiContext )
 
 
-    const handleOrderChange = (event: SelectChangeEvent<string>) => {
-        orderBy(event.target.value);
-    };
+
 
     const handleViewChange = (event: React.MouseEvent<HTMLElement>, nextView: string) => {
         event.preventDefault()
@@ -30,9 +27,13 @@ export const CustomBar = () => {
   return (
     <Box sx={{
         display:'flex',
-        justifyContent:'space-between',
+        // justifyContent:'space-between',
+        gap:'30px',
         alignItems:'center',
-      
+        textAlign:'center',
+        padding:{xs:'10px', lg:'0'},
+        minWidth:'60vw',
+        
     }}>
 
         <ToggleButtonGroup
@@ -54,24 +55,7 @@ export const CustomBar = () => {
 
         <Search />   
 
-        <FormControl sx={{ width:'200px', marginTop:'-10px' }} size="small" variant="standard">
-            <InputLabel id="demo-select-small" size='small'>Order</InputLabel>
-                <Select
-                    labelId="demo-select-small"
-                    id="demo-select-small"
-                    value={order}
-                    label="Order"
-                    onChange={handleOrderChange}
-                >
-                    <MenuItem value={'name'}>Name A-Z </MenuItem>
-                    <MenuItem value={'-name'}>Name Z-A </MenuItem>
-                    <MenuItem value={'released'}>Released -+</MenuItem>
-                    <MenuItem value={'-released'}>Released +-</MenuItem>
-                    <MenuItem value={''}>Default</MenuItem>
-                </Select>
-        </FormControl>
-
-
+        <Box />
 
     </Box>
 

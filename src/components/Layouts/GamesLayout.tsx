@@ -19,7 +19,7 @@ export const GamesLayout:FC<Props> = ({ children }) => {
        
     </header>
 
-    <main style={{ marginBottom:'30px'}}>  
+    <main style={{ marginBottom:'30px', minHeight:'86vh'}} >  
         { children }
     </main>
    

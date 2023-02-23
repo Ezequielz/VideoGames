@@ -70,7 +70,7 @@ export const Home = (props: Props ) => {
 
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { lg: 0 }}}
+        sx={{ width: { lg: drawerWidth }, flexShrink: { lg: 0 }}}
         aria-label="mailbox folders"
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -85,7 +85,7 @@ export const Home = (props: Props ) => {
           sx={{
           
             display: { xs: 'block', lg: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, height:'90vh', marginTop:'60px' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, height:'80vh', marginTop:'60px' },
           }}
         >
           {drawer}
@@ -105,7 +105,8 @@ export const Home = (props: Props ) => {
       <Box
         component="main"
         sx={{  
-          padding:{xs:'20px',sm:'60px',} 
+          padding:{xs:'20px',sm:'60px'},
+          // width:{xl:'-webkit-fill-available'}
           // width: { sm: `calc(100% - ${drawerWidth}px)` }
          }}
       >
@@ -113,7 +114,7 @@ export const Home = (props: Props ) => {
           <Typography variant='h1' sx={{fontSize:{xs:'3rem',lg:'5rem'}}}>All Video Games</Typography>
         </Box>
 
-        <Box >
+        <Box sx={{  }}>
             
             <CustomBar />
     

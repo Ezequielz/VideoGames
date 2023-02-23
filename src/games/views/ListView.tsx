@@ -47,7 +47,7 @@ export const ListView = () => {
       {
         view === 'module'
          ? (
-          <Grid container spacing={2}>
+          <Grid container spacing={2} >
                   
               {
                   data?.results.map( (game:Game) =>(

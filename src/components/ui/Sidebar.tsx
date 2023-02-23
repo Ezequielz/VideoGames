@@ -1,11 +1,12 @@
 
 import { useContext } from 'react';
-import { Box, Typography } from '@mui/material'
+import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
 
 import { useGenres, usePlatforms, useTags, usePublishers } from '../../games/hooks';
 
 import { CustomAcordion } from './CustomAcordion';
 import { FiltersContext } from '../../context/filters';
+import { UiContext } from '../../context/ui';
 
 
 
@@ -25,7 +26,14 @@ export const Sidebar = () => {
     const { data: publishers } = publisherQuery;
 
     const { selectedGenres, selectedPlatform, selectedTags, selectedPublishers,
-            setSelectedGenres, setSelectedPlatform, setSelectedTags, setSelectedPublishers } = useContext( FiltersContext )
+            setSelectedGenres, setSelectedPlatform, setSelectedTags, setSelectedPublishers } = useContext( FiltersContext );
+
+    const { order, orderBy} = useContext( UiContext );
+
+
+    const handleOrderChange = (event: SelectChangeEvent<string>) => {
+        orderBy(event.target.value);
+    };
 
   return (
     <Box sx={{ padding: '20px',marginTop:{sm:'25px'} }}>
@@ -33,6 +41,25 @@ export const Sidebar = () => {
             <Typography variant='h5' sx={{ padding: '20px', textAlign:'center' }}>
                 Filtros
             </Typography>
+
+            <FormControl sx={{ width:'100%', marginBottom:'10px'}} size="small" variant="standard">
+                <InputLabel id="demo-select-small" size='small'>Order</InputLabel>
+                    <Select
+                        labelId="demo-select-small"
+                        id="demo-select-small"
+                        value={order}
+                        label="Order"
+                        onChange={handleOrderChange}
+                    >
+                        <MenuItem value={'name'}>Name A-Z </MenuItem>
+                        <MenuItem value={'-name'}>Name Z-A </MenuItem>
+                        <MenuItem value={'released'}>Released -+</MenuItem>
+                        <MenuItem value={'-released'}>Released +-</MenuItem>
+                        <MenuItem value={''}>Default</MenuItem>
+                    </Select>
+            </FormControl>
+
+
    
      
             <CustomAcordion 

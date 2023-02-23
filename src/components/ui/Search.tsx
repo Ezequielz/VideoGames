@@ -30,8 +30,7 @@ export const Search = () => {
   return (
     <>
         <Input
-            // sx={{ display: { xs: 'none', sm: 'flex'} }}
-           
+      
             className='fadeIn search'
             autoFocus
             value={ searchTerm }
