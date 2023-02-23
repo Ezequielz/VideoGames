@@ -40,7 +40,7 @@ export const GameDetail: FC<Props> = ({ game, screenshots }) => {
         navigate(`/games/genre/${ genre.slug }`)
     }
 
-    const handleTag = async( e: React.MouseEvent<HTMLElement> , tag: Tag ) => {
+    const handleTag = async( e: React.MouseEvent<HTMLElement> , tag: Genre ) => {
     
         await filtersClean()
         await setSelectedTags((tag.id).toString())
