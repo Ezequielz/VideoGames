@@ -9,7 +9,7 @@ import { Search } from "./Search";
 
 
 
-export const AppBar = () => {
+export const CustomBar = () => {
 
     const { view, viewList, viewModule, infinite, setInfinite, order, orderBy} = useContext( UiContext )
 
@@ -25,9 +25,7 @@ export const AppBar = () => {
        viewModule()
       };
     
-    const handleInfiniteChange = (event: React.MouseEvent<HTMLElement>, infinite: boolean) => {
-        setInfinite(infinite);
-      };
+
 
   return (
     <Box sx={{
@@ -38,7 +36,7 @@ export const AppBar = () => {
     }}>
 
         <ToggleButtonGroup
-        sx={{ padding:'15px 0' }}
+        sx={{ padding:'15px 0', display:{xs:'none', lg:'block'} }}
             orientation="horizontal"
             value={view}
             exclusive
@@ -74,23 +72,7 @@ export const AppBar = () => {
         </FormControl>
 
 
-        <ToggleButtonGroup
-        sx={{ padding:'15px 0' }}
-            orientation="horizontal"
-            value={infinite}
-            exclusive
-            onChange={handleInfiniteChange}
-            size="small"
-        >
-            <ToggleButton value={true} aria-label="infinite">
-                <AllInclusiveIcon />
-            </ToggleButton>
-            <ToggleButton value={false} aria-label="pagination">
-                <Filter1OutlinedIcon />
-            </ToggleButton>
 
-
-        </ToggleButtonGroup>
     </Box>
 
   )

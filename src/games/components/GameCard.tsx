@@ -46,7 +46,7 @@ export const GameCard: FC<Props> = ({game}) => {
 
             <Box sx={{ 
                         padding: '25px 0 0 0',
-                        // minHeight: '50px', 
+                        height: '50px', 
                         display: 'flex',
                         alignItems:'center',
                         justifyContent:'center' 
@@ -58,7 +58,7 @@ export const GameCard: FC<Props> = ({game}) => {
                     // fontSize={{xs:'0.72rem',sm:"0.85rem"}} 
                     // padding={{xs:'0 2px', md:'0 5px'}}
                     textAlign='center' 
-                    
+                    variant="body2"
                 >{ game.name }</Typography>
 
 

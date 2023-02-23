@@ -30,6 +30,13 @@ export const darkTheme = createTheme({
         }
       }
     },
+    MuiCardContent: {
+      styleOverrides: {
+        root:{
+          padding:'0px'
+        }
+      }
+    }
     
   },
 });

@@ -1,18 +1,16 @@
 
 import { useContext } from 'react';
-import { CardActionArea, Grid } from "@mui/material"
+import { Box, Typography, CardActionArea, Grid } from "@mui/material"
+
 import { LoadingIcon } from "../../components/ui";
-import { GameCard } from "../components"
+import { GameCard, PaginationsButtons, GameCardList } from "../components"
 
 import { useGames } from "../hooks/useGames";
-import {Box, Typography} from '@mui/material';
-import { Game } from "../interfaces/game";
-import Button from '@mui/material/Button/Button';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import { GameCardList } from '../components/GameCardList';
+
 import { UiContext } from '../../context/ui';
 import { FiltersContext } from '../../context/filters';
+
+import { Game } from "../interfaces/game";
 
 
 export const ListView = () => {
@@ -102,39 +100,16 @@ export const ListView = () => {
               }
 
           </Grid>
-            // <Grid container spacing={2}>
-            //   {
-            //     data?.results.map( (game:Game) => (
-            //       <CardActionArea key={game.id} sx={{ padding:'3px' }}>
-
-            //         <GameCardList  game={game} />
-            //       </CardActionArea>
-            //     ))
-            //   }
-            // </Grid>
     
           )
       }
 
-          <Box sx={{
-            display:'flex',
-            alignItems:'center',
-            justifyContent:'end'
-          }}>
-            <Button
-              onClick={ prevPage }
-              disabled={ gamesQuery.isFetching }
-            > <NavigateBeforeIcon />
-            </Button>
-            
-            <Typography> {page} </Typography>
-
-            <Button
-              onClick={ nextPage }
-              disabled={ gamesQuery.isFetching }
-            ><NavigateNextIcon />
-            </Button>
-          </Box>
+      <PaginationsButtons 
+        gamesQuery={gamesQuery}
+        nextPage={nextPage}
+        page={page}
+        prevPage={prevPage}
+      />
     </Box>
 
     

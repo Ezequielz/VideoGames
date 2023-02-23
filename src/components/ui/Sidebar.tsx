@@ -28,8 +28,11 @@ export const Sidebar = () => {
             setSelectedGenres, setSelectedPlatform, setSelectedTags, setSelectedPublishers } = useContext( FiltersContext )
 
   return (
-    <Box sx={{ padding: '20px' }}>
+    <Box sx={{ padding: '20px',marginTop:{sm:'25px'} }}>
 
+            <Typography variant='h5' sx={{ padding: '20px', textAlign:'center' }}>
+                Filtros
+            </Typography>
    
      
             <CustomAcordion 

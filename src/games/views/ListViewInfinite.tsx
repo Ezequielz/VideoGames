@@ -5,7 +5,7 @@ import {Box, Typography} from '@mui/material';
 import Button from '@mui/material/Button/Button';
 
 import { LoadingIcon } from "../../components/ui";
-import { GameCard } from "../components"
+import { GameCard, InfiniteButton } from "../components"
 import { useGamesInfinite } from '../hooks';
 import { Game } from "../interfaces/game";
 import { GameCardList } from '../components/GameCardList';
@@ -100,15 +100,19 @@ export const ListViewInfinite = () => {
             )
           }
 
-     
+     <Box sx={{ display:'flex', justifyContent:'space-between' }}>
 
-      <Button 
-        sx={{ marginTop:'15px' }}
-        disabled={ !gamesQuery.hasNextPage }
-        onClick={ () => gamesQuery.fetchNextPage() }
-      >
-        <Typography>Load More</Typography>
-      </Button>
+        <Button 
+          sx={{ marginTop:'15px' }}
+          disabled={ !gamesQuery.hasNextPage }
+          onClick={ () => gamesQuery.fetchNextPage() }
+        >
+          <Typography>Load More</Typography>
+        </Button>
+
+        <InfiniteButton />
+     </Box>
+
 
     </Box>
 

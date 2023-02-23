@@ -7,7 +7,7 @@ export const Games = () => {
 
   
   return (
-    <Box>
+    <Box >
 
         <GameViews />
 

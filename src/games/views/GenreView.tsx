@@ -1,8 +1,9 @@
 import { useParams } from "react-router";
 import { Box, Typography } from "@mui/material"
 import { GamesLayout } from "../../components/Layouts"
-import { AppBar } from "../../components/ui";
+
 import { Games } from "../components";
+import { CustomBar } from "../../components/ui";
 
 
 
@@ -19,7 +20,7 @@ export const GenreView = () => {
           <Typography variant='h1' sx={{fontSize:'5rem'}}>Games Of {genre}</Typography>
         </Box>
         <Box sx={{ padding:'0 80px' }}>
-          <AppBar />
+          <CustomBar />
           <Games />
 
         </Box>
