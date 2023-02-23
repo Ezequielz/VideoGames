@@ -1,21 +1,18 @@
-import { FC, useCallback, useContext, useState } from "react";
-import { Box, FormControl, IconButton, Input, InputAdornment, InputLabel, MenuItem, Select, SelectChangeEvent, ToggleButton, ToggleButtonGroup } from "@mui/material"
+import { useContext } from "react";
+import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, ToggleButton, ToggleButtonGroup } from "@mui/material"
 import ViewListIcon from '@mui/icons-material/ViewList';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
-import { SearchOutlined } from "@mui/icons-material";
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import Filter1OutlinedIcon from '@mui/icons-material/Filter1Outlined';
-import debounce from "just-debounce-it";
 import { UiContext } from "../../context/ui";
-import { FiltersContext } from '../../context/filters/FiltersContext';
+import { Search } from "./Search";
 
 
 
 export const AppBar = () => {
 
     const { view, viewList, viewModule, infinite, setInfinite, order, orderBy} = useContext( UiContext )
-    const { search, setSearch } = useContext( FiltersContext )
-    const [ searchTerm, setSearchTerm ] = useState('')
+
 
     const handleOrderChange = (event: SelectChangeEvent<string>) => {
         orderBy(event.target.value);
@@ -32,24 +29,6 @@ export const AppBar = () => {
         setInfinite(infinite);
       };
 
-    const onSearchTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
-
-        const newSearch = e.target.value;
-        if ( newSearch.startsWith(' ') ) return
-        setSearchTerm(newSearch);
-        debouncedGetGame(newSearch)
-
-    }
-
-    const debouncedGetGame = useCallback(
-        debounce((search: string) => {
-        // console.log('search', search)
-        setSearch(search);
-    }, 300)
-    , [search]
-    )
-
-
   return (
     <Box sx={{
         display:'flex',
@@ -64,7 +43,7 @@ export const AppBar = () => {
             value={view}
             exclusive
             onChange={handleViewChange}
-            
+            size="small"
         >
             <ToggleButton value="list" aria-label="list" >
                 <ViewListIcon />
@@ -75,44 +54,23 @@ export const AppBar = () => {
 
         </ToggleButtonGroup>
 
-       
-        <Input
-            sx={{ display: { xs: 'none', sm: 'flex', width:'50%'} }}
-            className='fadeIn'
-            autoFocus
-             value={ searchTerm }
-            //  onChange={ (e) => setSearchTerm( e.target.value ) }
-             onChange={ onSearchTerm }
-            //  onKeyPress={ (e)=> e.key === 'Enter' ? onSearchTerm() : null }
-            //  onKeyPress={ onSearchTerm }
-            type='text'
-            placeholder="Search Game..."
-            endAdornment={
-                <InputAdornment position="end">
-                    <IconButton
-                        //    onClick={ () => setIsSearchVisible(false) }
-                    >
-                    <SearchOutlined />
-                    </IconButton>
-                </InputAdornment>
-            }
-        />
+        <Search />   
 
-        <FormControl sx={{ width:'200px' }}>
-        <InputLabel id="demo-simple-select-label">Order</InputLabel>
-            <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={order}
-                label="Order"
-                onChange={handleOrderChange}
-            >
-                <MenuItem value={'name'}>Name A-Z </MenuItem>
-                <MenuItem value={'-name'}>Name Z-A </MenuItem>
-                <MenuItem value={'released'}>Released -+</MenuItem>
-                <MenuItem value={'-released'}>Released +-</MenuItem>
-                <MenuItem value={''}>Default</MenuItem>
-            </Select>
+        <FormControl sx={{ width:'200px', marginTop:'-10px' }} size="small" variant="standard">
+            <InputLabel id="demo-select-small" size='small'>Order</InputLabel>
+                <Select
+                    labelId="demo-select-small"
+                    id="demo-select-small"
+                    value={order}
+                    label="Order"
+                    onChange={handleOrderChange}
+                >
+                    <MenuItem value={'name'}>Name A-Z </MenuItem>
+                    <MenuItem value={'-name'}>Name Z-A </MenuItem>
+                    <MenuItem value={'released'}>Released -+</MenuItem>
+                    <MenuItem value={'-released'}>Released +-</MenuItem>
+                    <MenuItem value={''}>Default</MenuItem>
+                </Select>
         </FormControl>
 
 
@@ -122,6 +80,7 @@ export const AppBar = () => {
             value={infinite}
             exclusive
             onChange={handleInfiniteChange}
+            size="small"
         >
             <ToggleButton value={true} aria-label="infinite">
                 <AllInclusiveIcon />

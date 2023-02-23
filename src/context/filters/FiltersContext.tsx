@@ -15,6 +15,7 @@ interface ContextProps {
     setSelectedTags: (tag: string) => void;
     setSelectedPlatform: (platform: string) => void;
     setSearch: (search: string) => void;
+    filtersClean: () => void;
 }
 
 

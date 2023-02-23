@@ -1,4 +1,5 @@
 
+import { Box } from '@mui/material'
 import { FC } from 'react'
 import { Footer, Navbar } from '../ui'
 
@@ -9,11 +10,14 @@ interface Props{
 
 export const GamesLayout:FC<Props> = ({ children }) => {
   return (
-   <div >
+   <>
    
-    <nav>
+    <header >
+      
+
         <Navbar />
-    </nav>
+       
+    </header>
 
     <main style={{ marginBottom:'30px'}}>  
         { children }
@@ -23,6 +27,6 @@ export const GamesLayout:FC<Props> = ({ children }) => {
         <Footer />
     </footer>
    
-   </div>
+   </>
   )
 }

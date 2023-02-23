@@ -44,6 +44,9 @@ export const FiltersProvider:FC<Props> = ({ children }) => {
    const setSearch = ( search:string ) => {
     dispatch({ type: '[Filters] - Search', payload: search })
    };
+   const filtersClean = () => {
+    dispatch({ type: '[Filters] - Clean'})
+   };
    
 
    return (
@@ -57,6 +60,7 @@ export const FiltersProvider:FC<Props> = ({ children }) => {
           setSelectedTags,
           setSelectedPlatform,
           setSearch,
+          filtersClean,
        }} >
          { children }
        </FiltersContext.Provider>

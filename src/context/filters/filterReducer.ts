@@ -67,7 +67,8 @@ import { FiltersState } from './';
                     selectedGenres: [],
                     selectedPublishers: [],
                     selectedTags: [],
-                    selectedPlatform: []
+                    selectedPlatform: [],
+                    search:''
                }
 
            default:

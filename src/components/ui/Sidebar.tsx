@@ -1,6 +1,6 @@
 
 import { useContext } from 'react';
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 import { useGenres, usePlatforms, useTags, usePublishers } from '../../games/hooks';
 
@@ -29,6 +29,8 @@ export const Sidebar = () => {
 
   return (
     <Box sx={{ padding: '20px' }}>
+
+   
      
             <CustomAcordion 
                 title={'Genres'}
@@ -44,7 +46,7 @@ export const Sidebar = () => {
             />
             <CustomAcordion 
                 title={'Tags'}
-                array={tags.results}
+                array={tags!.results}
                 selected={selectedTags}
                 onChanged={setSelectedTags}
             />

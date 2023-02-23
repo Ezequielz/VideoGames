@@ -1,12 +1,18 @@
-import { FC } from "react"
+import { FC, useContext } from "react"
 import { useNavigate } from "react-router";
 
 import { Box, Grid, Typography,Divider, Button, Link } from "@mui/material"
 import moment from 'moment';
 
 import { LoadingIcon, SlideShow } from "../../components/ui";
-import { Screenshots } from "../interfaces";
+import {  Screenshots } from "../interfaces";
 import { Game } from "../interfaces/game"
+import { Platform } from '../interfaces/platforms';
+import { FiltersContext } from "../../context/filters";
+import { Genre } from "../interfaces/genres";
+import { Tag } from "../interfaces/tags";
+import { Publisher } from "../interfaces/publishers";
+
 
 
 
@@ -18,13 +24,38 @@ interface Props {
 
 export const GameDetail: FC<Props> = ({ game, screenshots }) => {
 
-    
+    const { setSelectedPlatform, setSelectedGenres, setSelectedTags, setSelectedPublishers, filtersClean } = useContext( FiltersContext );
     const released = moment(game?.released).format('DD MMMM YYYY');
     const navigate = useNavigate();
 
+    const handlePlatform = async(platform: Platform) => {
+        await filtersClean()
+        await setSelectedPlatform((platform.id).toString())
+        navigate(`/games/platform/${ platform.slug }`)
+    }
+    const handleGenre = async( e: React.MouseEvent<HTMLElement> , genre: Genre ) => {
+    
+        await filtersClean()
+        await setSelectedGenres((genre.id).toString())
+        navigate(`/games/genre/${ genre.slug }`)
+    }
+
+    const handleTag = async( e: React.MouseEvent<HTMLElement> , tag: Tag ) => {
+    
+        await filtersClean()
+        await setSelectedTags((tag.id).toString())
+        navigate(`/games/tag/${ tag.slug }`)
+    }
+
+    const handlePublisher = async( e: React.MouseEvent<HTMLElement> , publisher: Publisher ) => {
+    
+        await filtersClean()
+        await setSelectedPublishers((publisher.id).toString())
+        navigate(`/games/publisher/${ publisher.slug }`)
+    }
 
   return (
-    <Box >
+    < >
 
  
         <Grid  container sx={{
@@ -104,14 +135,14 @@ export const GameDetail: FC<Props> = ({ game, screenshots }) => {
                     <Grid item lg={4}  sx={{padding:'10px'}}>
                         <Typography>Genres</Typography>
                         {
-                            game?.genres.map((genre) => (
+                            game?.genres.map(genre => (
 
                                     <Typography 
                                         variant="caption" 
                                         key={genre.id} 
                                         className="btn" 
                                         style={{margin:'2px'}}
-                                        onClick={() => navigate(`/games/genre/${ genre.slug }`)}
+                                        onClick={ (e) => handleGenre(e, genre) }
                                     >
                                         {genre.name}
                                     </Typography>
@@ -129,7 +160,7 @@ export const GameDetail: FC<Props> = ({ game, screenshots }) => {
                                     key={publisher.id} 
                                     className="btn" 
                                     style={{margin:'2px'}}
-                                    onClick={() => navigate(`/games/publisher/${ publisher.slug }`)}
+                                    onClick={(e) => handlePublisher(e, publisher)}
                                 >
                                     {publisher.name} 
                                 </Typography>
@@ -154,7 +185,7 @@ export const GameDetail: FC<Props> = ({ game, screenshots }) => {
                                         key={tag.id} 
                                         className="btn" 
                                         style={{margin:'2px'}}
-                                        onClick={() => navigate(`/games/tag/${ tag.slug }`)}
+                                        onClick={(e) => handleTag(e, tag)}
                                     >
                                         {tag.name} 
                                     </Typography>
@@ -172,7 +203,7 @@ export const GameDetail: FC<Props> = ({ game, screenshots }) => {
                                         key={platform.id} 
                                         className="btn" 
                                         style={{margin:'2px'}}
-                                        onClick={() => navigate(`/games/platform/${ platform.slug }`)}
+                                        onClick={(Platform) => handlePlatform(platform as Platform) }
                                     >
                                         {platform.name}
                                     </Typography >
@@ -221,7 +252,7 @@ export const GameDetail: FC<Props> = ({ game, screenshots }) => {
 
 
 
-    </Box>
+    </>
 
  
   )

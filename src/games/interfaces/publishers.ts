@@ -11,7 +11,7 @@ export interface Publisher {
     slug:             string;
     games_count:      number;
     image_background: string;
-    games:            Game[];
+    games?:            Game[];
 }
 
 export interface Game {
