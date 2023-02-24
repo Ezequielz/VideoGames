@@ -6,7 +6,7 @@ import moment from 'moment';
 
 import { LoadingIcon, SlideShow } from "../../components/ui";
 import {  Screenshots } from "../interfaces";
-import { Game } from "../interfaces/game"
+import { Game, Color } from '../interfaces/game';
 import { Platform } from '../interfaces/platforms';
 import { FiltersContext } from "../../context/filters";
 import { Genre } from "../interfaces/genres";
@@ -60,28 +60,34 @@ export const GameDetail: FC<Props> = ({ game, screenshots }) => {
  
         <Grid  container sx={{
             marginTop:'40px',
-            padding: {xs:'20px', md:'60px'},
+            padding: {xs:'60px 20px', md:'60px'},
             backgroundColor:'transparent',
             backgroundImage: `linear-gradient(rgba(15, 15, 15, 0), rgb(21, 21, 21)), linear-gradient(rgba(21, 21, 21, 0.8), rgba(21, 21, 21, 0.5)), url(${ game?.background_image })`,
             backgroundSize:'cover'
         }}>
             
 
-            <Grid item xs={12} lg={6}>
+            <Grid item xs={12} lg={6} sx={{ color:'#fff' }}>
                 <Box sx={{
-                    display:'flex',
+                    display:{ sm:'flex' },
                     justifyContent:'space-between',
                     alignItems:'center',
+                    marginBottom:{ xs:'10px', lg:'0'}
                 }}> 
-                    <Typography variant="h1" >{game?.name}</Typography>.
+                    <Typography variant="h1">{game?.name}</Typography>
 
-                    <Box sx={{ bgcolor:'#ffff',color:'black', padding:'4px 12px', borderRadius:'10px', fontStyle:'italic'}}>
+                    <Box sx={{ bgcolor:'#ffff',color:'black', padding:'4px 12px', borderRadius:'10px', fontStyle:'italic', width:'fit-content',
+                    //  margin:{xs:'auto', sm:'0'}
+                    position:{ xs:'absolute', sm:'inherit' },
+                    right:{xs:'20px'},
+                    top:'70px'
+                     }}>
 
-                        <Typography variant="body2">{released}</Typography>
+                        <Typography variant="body2" >{released}</Typography>
                     </Box>
 
                 </Box>
-                    <Divider />
+                    <Divider sx={{ bgcolor:'#fff' }}/>
                     <Typography variant="subtitle1">
                         About
                     </Typography>
