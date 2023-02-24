@@ -4,7 +4,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Genre } from "../../games/interfaces/genres";
 
 
-
 interface Props {
     title: string;
     array: Genre[];

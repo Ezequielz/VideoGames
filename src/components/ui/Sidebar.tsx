@@ -1,6 +1,7 @@
 
 import { useContext } from 'react';
-import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material'
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 import { useGenres, usePlatforms, useTags, usePublishers } from '../../games/hooks';
 
@@ -26,7 +27,7 @@ export const Sidebar = () => {
     const { data: publishers } = publisherQuery;
 
     const { selectedGenres, selectedPlatform, selectedTags, selectedPublishers,
-            setSelectedGenres, setSelectedPlatform, setSelectedTags, setSelectedPublishers } = useContext( FiltersContext );
+            setSelectedGenres, setSelectedPlatform, setSelectedTags, setSelectedPublishers, filtersClean } = useContext( FiltersContext );
 
     const { order, orderBy} = useContext( UiContext );
 
@@ -38,8 +39,18 @@ export const Sidebar = () => {
   return (
     <Box sx={{ padding: '20px',marginTop:{sm:'25px'} }}>
 
-            <Typography variant='h5' sx={{ padding: '20px', textAlign:'center' }}>
+            <Typography variant='h5' sx={{ padding: '20px', display:'flex', justifyContent:'center', alignItems:'center', gap:'5px'}}>
                 Filtros
+                {
+                    (selectedGenres.length >= 1 || selectedPlatform.length >=1 || selectedPublishers.length >=1 || selectedTags.length >=1 ) 
+                     && 
+                        <Box sx={{ marginTop:'8px'}}
+                            onClick={filtersClean}
+                            >
+
+                            <HighlightOffIcon sx={{ cursor:'pointer' }}/>
+                        </Box>
+                }
             </Typography>
 
             <FormControl sx={{ width:'100%', marginBottom:'10px'}} size="small" variant="standard">
