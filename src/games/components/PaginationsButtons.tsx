@@ -21,10 +21,12 @@ export const PaginationsButtons: FC<Props> = ({gamesQuery,page,nextPage,prevPage
             display:'flex',
             alignItems:'center',
             justifyContent:'end'
+            
         }}>
             <Button
             onClick={ prevPage }
             disabled={ gamesQuery.isFetching }
+            
             > <NavigateBeforeIcon />
             </Button>
             

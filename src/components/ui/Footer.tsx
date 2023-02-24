@@ -7,12 +7,13 @@ export const Footer = () => {
         height:'10vh',
         display:'flex',
         justifyContent:'center',
-        bgcolor:'#262626',
+        bgcolor:'secondary.main',
         alignItems:'center',
-        color:'white',
+        color:'secondary.light',
         position:'absolute',
         width:'100%'
-    }}>
+    }}
+    >
         
         <Typography> Desarrollado por Ezequiel Zapata</Typography>
     </Box>

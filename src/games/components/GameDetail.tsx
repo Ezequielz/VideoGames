@@ -6,11 +6,10 @@ import moment from 'moment';
 
 import { LoadingIcon, SlideShow } from "../../components/ui";
 import {  Screenshots } from "../interfaces";
-import { Game, Color } from '../interfaces/game';
+import { Game } from '../interfaces/game';
 import { Platform } from '../interfaces/platforms';
 import { FiltersContext } from "../../context/filters";
 import { Genre } from "../interfaces/genres";
-import { Tag } from "../interfaces/tags";
 import { Publisher } from "../interfaces/publishers";
 
 

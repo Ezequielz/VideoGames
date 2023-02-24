@@ -100,14 +100,14 @@ export const ListViewInfinite = () => {
             )
           }
 
-     <Box sx={{ display:'flex', justifyContent:'space-between' }}>
+     <Box sx={{ display:'flex', justifyContent:'space-between'}}>
 
         <Button 
           sx={{ marginTop:'15px' }}
           disabled={ !gamesQuery.hasNextPage }
           onClick={ () => gamesQuery.fetchNextPage() }
         >
-          <Typography>Load More</Typography>
+          <Typography >Load More</Typography>
         </Button>
 
         <InfiniteButton />
