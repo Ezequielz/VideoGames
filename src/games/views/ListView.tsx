@@ -11,6 +11,7 @@ import { UiContext } from '../../context/ui';
 import { FiltersContext } from '../../context/filters';
 
 import { Game } from "../interfaces/game";
+import { motion } from 'framer-motion';
 
 
 export const ListView = () => {
@@ -59,12 +60,18 @@ export const ListView = () => {
                           sm={4}
                           md={3} 
                       >
-
+                        <motion.div
+  
+                          whileHover={{ scale: [null, 1, 1.05], rotate:1 }}
+                          transition={{ duration: 0.3 }}
+                        >
                               <CardActionArea>
                                   
                                   <GameCard game={game} />
 
                               </CardActionArea>
+
+                        </motion.div>
 
                       </Grid>
                   
@@ -86,12 +93,19 @@ export const ListView = () => {
                           xs={12} 
                        
                       >
+                        <motion.div
+  
+                          whileHover={{ scale: [null, 1, 1.05], rotate:0.3 }}
+                          transition={{ duration: 0.3 }}
+                        >
 
                               <CardActionArea>
                                   
                                    <GameCardList  game={game} />
 
                               </CardActionArea>
+                        </motion.div>
+
 
                       </Grid>
                   

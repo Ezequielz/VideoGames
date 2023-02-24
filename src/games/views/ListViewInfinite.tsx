@@ -3,6 +3,7 @@ import { FC, useContext } from 'react';
 import { CardActionArea, Grid } from "@mui/material"
 import {Box, Typography} from '@mui/material';
 import Button from '@mui/material/Button/Button';
+import { motion } from 'framer-motion';
 
 import { LoadingIcon } from "../../components/ui";
 import { GameCard, InfiniteButton } from "../components"
@@ -58,12 +59,19 @@ export const ListViewInfinite = () => {
                       md={3}
                       
                   >
+                        <motion.div
+  
+                          whileHover={{ scale: [null, 1, 1.05], rotate:1 }}
+                          transition={{ duration: 0.3 }}
+                        >
 
                           <CardActionArea>
                               
                               <GameCard game={game} />
 
                           </CardActionArea>
+                        </motion.div>
+
 
                   </Grid>
 
@@ -83,13 +91,18 @@ export const ListViewInfinite = () => {
                           xs={12} 
                        
                       >
+                        <motion.div
+  
+                          whileHover={{ scale: [null, 1, 1.05], rotate:0.3 }}
+                          transition={{ duration: 0.3 }}
+                        >
 
                               <CardActionArea>
                                   
                                    <GameCardList  game={game} />
 
                               </CardActionArea>
-
+                        </motion.div>
                       </Grid>
                   
                       
