@@ -12,7 +12,7 @@ export const GamesLayout:FC<Props> = ({ children }) => {
   return (
    <>
    
-    <header >
+    <header  >
       
 
         <Navbar />

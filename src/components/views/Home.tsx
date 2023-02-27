@@ -112,21 +112,21 @@ export const Home = (props: Props ) => {
             }}
           >
           <Box sx={{ padding:'40px 0 0 0', width:'100%', textAlign:'center' }}>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{
-              duration: 0.5,
-              delay: 1.1,
-              // ease: [0, 0.71, 0.2, 1.01]
-            }}
-          >
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{
+                duration: 0.5,
+                delay: 1.1,
+                // ease: [0, 0.71, 0.2, 1.01]
+              }}
+            >
 
-              <Typography variant='h1' sx={{fontSize:{xs:'3rem',lg:'5rem'}}}>All Video Games</Typography>
-          </motion.div>
-            </Box>
+                <Typography variant='h1' sx={{fontSize:{xs:'2rem',lg:'5rem'}}}>All Video Games</Typography>
+            </motion.div>
+          </Box>
 
-            <Box sx={{  }}>
+            <Box >
                 
                 <CustomBar />
         
